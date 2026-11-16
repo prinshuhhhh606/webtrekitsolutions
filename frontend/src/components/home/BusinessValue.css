@@ -1,45 +1,94 @@
 /* BusinessValue Component Styles */
 .business-value-section {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  background-color: #021343;
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+  background: radial-gradient(ellipse at 50% -10%, #0e1e47 0%, #030818 55%, #01040d 100%);
   color: #ffffff;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Ambient background glow */
+.business-value-section::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(254, 138, 4, 0.12) 0%, rgba(2, 19, 67, 0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Scroll-Triggered Entrance Animation: Rise from bottom */
 .business-value-card {
   position: relative;
-  background-color: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1.5rem;
-  padding: 2rem;
-  backdrop-filter: blur(8px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 2.25rem 2rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  
+  /* Initial state: Hidden & pushed down */
+  opacity: 0;
+  transform: translateY(70px) scale(0.96);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+  will-change: transform, opacity;
 }
 
-.business-value-card:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(254, 138, 4, 0.5);
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px -5px rgba(254, 138, 4, 0.15);
+/* Visible State when scrolled into view */
+.business-value-grid.is-visible .business-value-card,
+.business-value-section.is-visible .business-value-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Card Hover Animation */
+.business-value-grid.is-visible .business-value-card:hover,
+.business-value-section.is-visible .business-value-card:hover {
+  transition-delay: 0ms !important;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(254, 138, 4, 0.45);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(254, 138, 4, 0.22);
 }
 
 .business-value-icon {
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 1rem;
-  background: linear-gradient(135deg, #fe8a04 0%, #ff5e13 100%);
+  background: linear-gradient(135deg, #ff9500 0%, #ff5e13 60%, #e03b00 100%);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1.5rem;
-  box-shadow: 0 4px 15px rgba(254, 138, 4, 0.35);
-  transition: transform 0.3s ease;
+  box-shadow: 0 4px 20px rgba(254, 138, 4, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .business-value-card:hover .business-value-icon {
   transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(254, 138, 4, 0.65);
 }
 
+/* Accessibility: respect user prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .business-value-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

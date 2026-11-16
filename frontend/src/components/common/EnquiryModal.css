@@ -7,9 +7,9 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background-color: rgba(2, 19, 67, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(1, 4, 16, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   animation: fadeIn 0.25s ease-out;
 }
 
@@ -19,19 +19,19 @@
   max-width: 32rem;
   background-color: #ffffff;
   border-radius: 1.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.7), 0 0 45px rgba(254, 138, 4, 0.12);
+  border: 1px solid rgba(254, 138, 4, 0.25);
   overflow: hidden;
 }
 
 .modal-header {
-  background-color: #021343;
-  padding: 1.25rem 1.5rem;
+  background: radial-gradient(ellipse at 50% 0%, #0d1e4e 0%, #03081a 100%);
+  padding: 1.35rem 1.75rem;
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(254, 138, 4, 0.18);
 }
 
 .modal-submit-btn {
@@ -40,41 +40,37 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #fe8a04 0%, #ff5e13 100%);
+  background: linear-gradient(135deg, #ff9500 0%, #ff5e13 60%, #e03b00 100%);
   color: #ffffff;
-  padding: 0.85rem 1.5rem;
+  padding: 0.9rem 1.5rem;
   border-radius: 0.75rem;
   font-weight: 700;
-  font-size: 0.875rem;
-  box-shadow: 0 4px 15px rgba(254, 138, 4, 0.35);
-  border: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.015em;
+  box-shadow: 0 4px 20px rgba(254, 138, 4, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-submit-btn:hover:not(:disabled) {
-  box-shadow: 0 6px 20px rgba(254, 138, 4, 0.5);
-  transform: translateY(-1px);
+  box-shadow: 0 8px 30px rgba(254, 138, 4, 0.65), 0 0 20px rgba(255, 94, 19, 0.4);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .modal-submit-btn:disabled {
-  opacity: 0.65;
+  opacity: 0.6;
   cursor: not-allowed;
-  transform: none;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: scale(0.97);
+    transform: scale(0.96);
   }
   to {
     opacity: 1;
     transform: scale(1);
   }
 }
-
-.animate-fade-in {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-

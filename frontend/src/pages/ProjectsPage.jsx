@@ -179,22 +179,24 @@ const ProjectsPage = () => {
             {filteredProjects.map((project) => (
               <div key={project._id || project.id} className="project-item-card flex flex-col justify-between">
                 <div>
-                  <div className="relative h-60 w-full overflow-hidden bg-gray-200">
+                  <div className="project-img-wrapper relative h-60 w-full overflow-hidden bg-gray-200">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
                     />
-                    <div className="absolute top-4 left-4 bg-[#021343]/85 text-[#fe8a04] text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-white/10">
+                    <div className="project-img-overlay" />
+                    <div className="absolute top-4 left-4 bg-[#021343]/85 text-[#fe8a04] text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-white/10 z-10">
                       {project.category}
                     </div>
-                    <div className="absolute bottom-4 right-4 bg-[#fe8a04] text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                    <div className="absolute bottom-4 right-4 bg-[#fe8a04] text-white text-xs font-bold px-3 py-1 rounded-full shadow z-10">
                       {project.price || '$65'}
                     </div>
                   </div>
 
                   <div className="p-6">
-                    <h3 className="font-heading font-bold text-xl text-[#021343] mb-3 leading-snug">
+                    <h3 className="project-card-title font-heading font-bold text-xl text-[#021343] mb-3 leading-snug">
                       {project.title}
                     </h3>
                     <p className="text-gray-600 text-sm leading-relaxed mb-4">
@@ -217,7 +219,7 @@ const ProjectsPage = () => {
                   <div className="flex flex-wrap items-center gap-2 pt-1">
                     <Link
                       to={`/our-project/${project.slug || project._id || project.id}`}
-                      className="flex-1 min-w-[100px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold text-[#021343] bg-gray-100 hover:bg-[#021343] hover:text-white transition-all cursor-pointer border border-gray-200"
+                      className="project-view-btn flex-1 min-w-[100px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold text-[#021343] bg-gray-100 hover:bg-[#021343] hover:text-white transition-all cursor-pointer border border-gray-200"
                       title="View Dynamic Project Case Study"
                     >
                       <Eye className="w-3.5 h-3.5" />
@@ -229,7 +231,7 @@ const ProjectsPage = () => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center p-2.5 rounded-xl text-gray-600 bg-white hover:bg-gray-100 hover:text-[#021343] transition-all cursor-pointer border border-gray-200"
+                        className="project-live-btn inline-flex items-center justify-center p-2.5 rounded-xl text-gray-600 bg-white hover:bg-gray-100 hover:text-[#021343] transition-all cursor-pointer border border-gray-200"
                         title="Visit Live Website"
                       >
                         <ExternalLink className="w-3.5 h-3.5 text-[#fe8a04]" />
@@ -249,10 +251,10 @@ const ProjectsPage = () => {
                           sourcePage: `Our Projects - ${project.title}`,
                         })
                       }
-                      className="flex-1 min-w-[120px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#fe8a04] to-[#ff5e13] hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shadow-sm"
+                      className="project-similar-btn flex-1 min-w-[120px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#fe8a04] to-[#ff5e13] hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shadow-sm"
                     >
                       <span>Similar Project</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform" />
                     </button>
                   </div>
                 </div>

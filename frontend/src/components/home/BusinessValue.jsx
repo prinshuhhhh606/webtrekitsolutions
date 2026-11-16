@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Users, Lightbulb, Clock, Handshake, TrendingUp, ShieldCheck } from 'lucide-react';
 import SectionHeader from '../common/SectionHeader';
 import './BusinessValue.css';
@@ -37,6 +37,29 @@ const values = [
 ];
 
 const BusinessValue = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    const el = gridRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        } else if (entry.boundingClientRect.top > 0) {
+          // Reset when scrolled back above, so it re-triggers smoothly when scrolling down again
+          setIsVisible(false);
+        }
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="business-value-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -48,11 +71,22 @@ const BusinessValue = () => {
           isDark={true}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          ref={gridRef}
+          className={`business-value-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ${
+            isVisible ? 'is-visible' : ''
+          }`}
+        >
           {values.map((val, idx) => {
             const Icon = val.icon;
             return (
-              <div key={idx} className="business-value-card">
+              <div
+                key={idx}
+                className="business-value-card"
+                style={{
+                  transitionDelay: isVisible ? `${idx * 110}ms` : '0ms',
+                }}
+              >
                 <div className="business-value-icon">
                   <Icon className="w-6 h-6" />
                 </div>

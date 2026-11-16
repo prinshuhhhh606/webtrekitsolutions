@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Lightbulb, Layers, Handshake, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './AboutSection.css';
 
 const AboutSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardsGridRef = useRef(null);
+
+  useEffect(() => {
+    const el = cardsGridRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        } else if (entry.boundingClientRect.top > 0) {
+          // Re-trigger when scrolling back down
+          setIsVisible(false);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const cards = [
     {
       id: 'smart-solutions',
@@ -60,14 +83,22 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* 3 Interactive Cards matching Elementor Infoboxes */}
-        <div className="webtrek-solution-cards-grid">
-          {cards.map((card) => {
+        {/* 3 Interactive Cards with Directed Scroll Entrance Animations */}
+        <div
+          ref={cardsGridRef}
+          className={`webtrek-solution-cards-grid ${
+            isVisible ? 'is-visible' : ''
+          }`}
+        >
+          {cards.map((card, idx) => {
             const Icon = card.icon;
             return (
               <div
                 key={card.id}
-                className={`webtrek-infobox card-theme-${card.theme}`}
+                className={`webtrek-infobox card-theme-${card.theme} infobox-entrance-${card.id}`}
+                style={{
+                  transitionDelay: isVisible ? `${idx * 120}ms` : '0ms',
+                }}
               >
                 <div className="webtrek-infobox-icon-wrap">
                   <Icon className="webtrek-infobox-icon" />

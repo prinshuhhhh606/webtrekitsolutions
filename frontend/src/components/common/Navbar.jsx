@@ -108,7 +108,7 @@ const Navbar = () => {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="lg:hidden bg-[#021343] border-b border-white/10 px-4 pt-3 pb-6 space-y-3 shadow-2xl">
+        <div className="lg:hidden bg-[#030919] border-b border-white/10 px-4 pt-3 pb-6 space-y-3 shadow-2xl">
           <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
               <NavLink

@@ -1,57 +1,72 @@
 /* AchievementCounters Component Styles */
 .achievement-section-wrapper {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  background: linear-gradient(180deg, #021343 0%, #010c2c 100%);
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+  background: radial-gradient(ellipse at 50% 0%, #0d1e47 0%, #030818 60%, #01040d 100%);
   color: #ffffff;
   position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .achievement-card {
   position: relative;
-  background-color: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
+  padding: 2.25rem 2rem;
   border-radius: 1.5rem;
   text-align: center;
-  backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .achievement-card:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(254, 138, 4, 0.4);
-  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(254, 138, 4, 0.45);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(254, 138, 4, 0.15);
 }
 
 .achievement-card-icon {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3.75rem;
+  height: 3.75rem;
   border-radius: 1rem;
-  background-color: rgba(254, 138, 4, 0.1);
-  color: #fe8a04;
-  border: 1px solid rgba(254, 138, 4, 0.3);
+  background: rgba(254, 138, 4, 0.12);
+  color: #ffaa33;
+  border: 1px solid rgba(254, 138, 4, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1.25rem;
-  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(254, 138, 4, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .achievement-card:hover .achievement-card-icon {
-  background-color: #fe8a04;
+  background: linear-gradient(135deg, #ff9500 0%, #ff5e13 100%);
   color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
   transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(254, 138, 4, 0.5);
 }
 
 .achievement-value {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
   font-weight: 900;
   font-size: 2.75rem;
-  color: #ffffff;
-  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
   margin-bottom: 0.5rem;
 }
 
+.achievement-label {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  font-weight: 500;
+}

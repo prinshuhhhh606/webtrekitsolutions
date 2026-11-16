@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Target, Compass, Award, CheckCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useWebsite } from '../context/WebsiteContext';
 import TeamSection from '../components/home/TeamSection';
@@ -9,9 +9,51 @@ import './AboutUsPage.css';
 
 const AboutUsPage = () => {
   const { openEnquiryModal } = useWebsite();
+  const [isValuesVisible, setIsValuesVisible] = useState(false);
+  const valuesGridRef = useRef(null);
+  const [isAgencyImgVisible, setIsAgencyImgVisible] = useState(false);
+  const agencyImgRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const el = valuesGridRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsValuesVisible(true);
+        } else if (entry.boundingClientRect.top > 0) {
+          setIsValuesVisible(false);
+        }
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const el = agencyImgRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsAgencyImgVisible(true);
+        } else if (entry.boundingClientRect.top > 0) {
+          setIsAgencyImgVisible(false);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   const skills = [
@@ -154,12 +196,23 @@ const AboutUsPage = () => {
             </div>
 
             <div className="relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
-                <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80"
-                  alt="Webtrek Agency Modern World"
-                  className="w-full h-[400px] object-cover"
-                />
+              <div
+                ref={agencyImgRef}
+                className={`about-agency-img-card ${
+                  isAgencyImgVisible ? 'is-visible' : ''
+                }`}
+              >
+                {/* Radiant Ambient Glow Behind Image */}
+                <div className="about-agency-ambient-glow" />
+
+                <div className="about-agency-img-box rounded-3xl overflow-hidden shadow-2xl border border-gray-100 relative">
+                  <img
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80"
+                    alt="Webtrek Agency Modern World"
+                    className="w-full h-[400px] object-cover about-agency-img"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#021343]/50 via-transparent to-transparent pointer-events-none" />
+                </div>
               </div>
             </div>
           </div>
@@ -176,9 +229,20 @@ const AboutUsPage = () => {
             subtitle="Our core commitments that ensure your peace of mind and sustained digital growth."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            ref={valuesGridRef}
+            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 about-values-grid ${
+              isValuesVisible ? 'is-visible' : ''
+            }`}
+          >
             {businessValues.map((val, idx) => (
-              <div key={idx} className="bg-white p-7 rounded-2xl border border-gray-200/80 shadow-sm hover:shadow-md transition-all">
+              <div
+                key={idx}
+                className="about-value-card bg-white p-7 rounded-2xl border border-gray-200/80 shadow-sm"
+                style={{
+                  transitionDelay: isValuesVisible ? `${idx * 110}ms` : '0ms',
+                }}
+              >
                 <h4 className="font-heading font-bold text-lg text-[#021343] mb-2">
                   {val.title}
                 </h4>

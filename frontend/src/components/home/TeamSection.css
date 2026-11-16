@@ -1,23 +1,79 @@
 /* TeamSection Component Styles */
 .team-section-wrapper {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
   background-color: #ffffff;
   position: relative;
+  overflow: hidden;
 }
 
+/* Scroll-Triggered Entrance Animation: Rise from bottom */
 .team-card-box {
   background-color: #f8fafc;
   border-radius: 1.5rem;
   overflow: hidden;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.04);
+  
+  /* Initial state: Hidden & pushed down */
+  opacity: 0;
+  transform: translateY(65px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+  will-change: transform, opacity;
 }
 
-.team-card-box:hover {
-  border-color: rgba(254, 138, 4, 0.4);
-  box-shadow: 0 20px 40px -15px rgba(254, 138, 4, 0.15);
-  transform: translateY(-4px);
+/* Visible State when scrolled into view */
+.team-cards-grid.is-visible .team-card-box,
+.team-section-wrapper.is-visible .team-card-box {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card Hover Animation */
+.team-cards-grid.is-visible .team-card-box:hover,
+.team-section-wrapper.is-visible .team-card-box:hover {
+  transition-delay: 0ms !important;
+  border-color: rgba(254, 138, 4, 0.45);
+  box-shadow: 0 25px 50px -15px rgba(2, 19, 67, 0.15), 0 0 20px rgba(254, 138, 4, 0.15);
+  transform: translateY(-8px);
+}
+
+/* Image Wrapper & Smooth Zoom */
+.team-img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.team-card-img {
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.team-card-box:hover .team-card-img {
+  transform: scale(1.08);
+}
+
+/* Overlay Fade In */
+.team-overlay {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.team-card-box:hover .team-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Accessibility: respect user prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .team-card-box {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 

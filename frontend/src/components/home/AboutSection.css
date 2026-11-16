@@ -7,6 +7,7 @@
   padding: 100px 0;
   background-color: #ffffff;
   position: relative;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -85,16 +86,71 @@
   }
 }
 
-/* Base Infobox Styling */
+/* Base Infobox Styling with Directed Scroll Entrance */
 .webtrek-infobox {
   padding: 50px 36px;
   border-radius: 8px;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+  will-change: transform, opacity;
+}
+
+/* 1. Smart & Innovative Solutions: Left se aye */
+.infobox-entrance-smart-solutions {
+  transform: translateX(-80px);
+}
+
+/* 2. End-to-End Digital Transformation: Niche se aye */
+.infobox-entrance-digital-transformation {
+  transform: translateY(80px);
+}
+
+/* 3. Trusted Digital Partner: Right side se aye */
+.infobox-entrance-trusted-partner {
+  transform: translateX(80px);
+}
+
+/* Visible State: Animated smoothly into their exact position */
+.webtrek-solution-cards-grid.is-visible .webtrek-infobox {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Hover Elevation once arrived */
+.webtrek-solution-cards-grid.is-visible .card-theme-blue:hover,
+.webtrek-solution-cards-grid.is-visible .card-theme-orange:hover,
+.webtrek-solution-cards-grid.is-visible .card-theme-white:hover {
+  transition-delay: 0ms !important;
+  transform: translateY(-8px);
+}
+
+@media (max-width: 640px) {
+  .infobox-entrance-smart-solutions {
+    transform: translateX(-40px);
+  }
+  .infobox-entrance-digital-transformation {
+    transform: translateY(50px);
+  }
+  .infobox-entrance-trusted-partner {
+    transform: translateX(40px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .webtrek-infobox {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
 }
 
 .webtrek-infobox-icon-wrap {

@@ -39,6 +39,19 @@ const HeroSection = () => {
       {/* Background Image Container with user provided image */}
       <div className="hero-banner-bg" />
 
+      {/* Animated Gradient Mesh & Ambient Lighting */}
+      <div className="hero-animated-mesh" />
+
+      {/* Decorative Floating Glowing Elements */}
+      <div className="hero-floating-elements" aria-hidden="true">
+        <div className="hero-orb hero-orb-1" />
+        <div className="hero-orb hero-orb-2" />
+        <div className="hero-orb hero-orb-center" />
+        <div className="hero-shape hero-shape-ring" />
+        <div className="hero-shape hero-shape-diamond" />
+        <div className="hero-tech-grid" />
+      </div>
+
       {/* Corporate Overlay matching webtrekitsolutions.in (#314376 with high contrast) */}
       <div className="hero-banner-overlay" />
 
@@ -91,14 +104,18 @@ const HeroSection = () => {
 
         {/* Four Service Boxes in One Row at the Bottom of Hero Banner */}
         <div className="hero-service-cards-row">
-          {heroServices.map((service) => {
+          {heroServices.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div key={service.id} className="hero-service-card">
+              <div
+                key={service.id}
+                className={`hero-service-card hero-service-card-${index + 1} group`}
+              >
                 <div className="hero-card-header">
                   <div className="hero-card-icon-box">
                     <Icon className="w-6 h-6" />
                   </div>
+                  <span className="hero-card-index">0{index + 1}</span>
                 </div>
 
                 <h3 className="hero-card-title">{service.title}</h3>

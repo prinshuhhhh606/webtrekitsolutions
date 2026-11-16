@@ -106,10 +106,10 @@ const ServicesPage = () => {
               <div
                 key={service.id}
                 id={service.id}
-                className={`service-feature-card ${isEven ? 'alt' : ''} grid grid-cols-1 lg:grid-cols-12 gap-10 items-center`}
+                className={`service-feature-card service-feature-card-${index + 1} ${isEven ? 'alt' : ''} grid grid-cols-1 lg:grid-cols-12 gap-10 items-center`}
               >
                 <div className={`lg:col-span-5 ${isEven ? 'lg:order-2' : ''}`}>
-                  <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+                  <div className="service-img-container rounded-2xl overflow-hidden shadow-lg border border-gray-200">
                     <img
                       src={service.image}
                       alt={service.title}

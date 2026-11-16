@@ -64,3 +64,23 @@
   margin-top: 0.25rem;
 }
 
+/* Dashboard Charts & Visualization Styles */
+.dashboard-chart-card {
+  transition: all 0.3s ease;
+}
+
+.dashboard-chart-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(2, 19, 67, 0.08);
+}
+
+/* Chart Canvas Animations */
+svg circle {
+  transition: stroke-width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.25s ease,
+              transform 0.25s ease;
+}
+
+svg path {
+  transition: stroke-width 0.25s ease;
+}
+

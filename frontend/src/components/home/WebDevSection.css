@@ -1,37 +1,154 @@
-/* WebDevSection Component Styles */
+/* ==========================================================================
+   WebDevSection.css - Scroll-Triggered Entrance Animation & Floating Badge
+   ========================================================================== */
+
 .webdev-section-wrapper {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  background-color: #f8fafc;
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+  background-color: #fafbfc;
   position: relative;
   overflow: hidden;
 }
 
+/* 1. Visual Card Wrapper - Smooth Scroll-Triggered Rise from Bottom */
+.webdev-visual-wrapper {
+  position: relative;
+  opacity: 0;
+  transform: translateY(70px) scale(0.96);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.webdev-visual-wrapper.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 2. Radiant Ambient Glow behind the Card */
+.webdev-ambient-glow {
+  position: absolute;
+  width: 85%;
+  height: 85%;
+  left: 7.5%;
+  top: 7.5%;
+  background: radial-gradient(circle, rgba(254, 138, 4, 0.25) 0%, rgba(2, 19, 67, 0.15) 50%, transparent 75%);
+  filter: blur(55px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 1.2s ease 0.2s, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+.webdev-visual-wrapper.is-visible .webdev-ambient-glow {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* 3. Main Image Card Surface */
 .webdev-image-card {
   position: relative;
-  border-radius: 1.5rem;
+  z-index: 1;
+  border-radius: 1.75rem;
   overflow: hidden;
-  box-shadow: 0 20px 40px -15px rgba(2, 19, 67, 0.15);
-  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 25px 60px -15px rgba(3, 10, 33, 0.25), 0 0 0 1px rgba(226, 232, 240, 0.85);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.5s ease;
+  will-change: transform, box-shadow;
 }
 
+.webdev-image-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 35px 75px -15px rgba(254, 138, 4, 0.24), 0 0 0 1px rgba(254, 138, 4, 0.4);
+}
+
+/* 4. Hero Image Smooth Zoom */
+.webdev-hero-img {
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.webdev-image-card:hover .webdev-hero-img {
+  transform: scale(1.06);
+}
+
+/* 5. Floating "All In One Package - Smart Digital Solutions" Card */
+.webdev-floating-card {
+  background: rgba(3, 9, 25, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(254, 138, 4, 0.35);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.7), 0 0 30px rgba(254, 138, 4, 0.15);
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(45px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.35s,
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.35s,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+  will-change: transform, opacity;
+}
+
+.webdev-visual-wrapper.is-visible .webdev-floating-card {
+  opacity: 1;
+  transform: translateY(0);
+  animation: gentleFloat 5s ease-in-out infinite 1.2s;
+}
+
+.webdev-image-card:hover .webdev-floating-card {
+  border-color: rgba(254, 138, 4, 0.7);
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.8), 0 0 35px rgba(254, 138, 4, 0.3);
+}
+
+/* Ambient Floating Breathing Keyframes */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* 6. CTA Button */
 .webdev-cta-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #021343;
+  background: linear-gradient(135deg, #020718 0%, #040e2d 100%);
   color: #ffffff;
-  padding: 0.85rem 1.75rem;
+  padding: 0.85rem 1.85rem;
   border-radius: 9999px;
   font-weight: 700;
-  font-size: 0.875rem;
-  transition: all 0.3s ease;
+  font-size: 0.88rem;
+  box-shadow: 0 4px 15px rgba(2, 7, 24, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .webdev-cta-btn:hover {
-  background-color: #fe8a04;
-  box-shadow: 0 4px 15px rgba(254, 138, 4, 0.4);
+  background: linear-gradient(135deg, #ff9500 0%, #ff5e13 100%);
+  box-shadow: 0 8px 25px rgba(254, 138, 4, 0.55);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
 }
 
+/* 7. Accessibility - prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .webdev-visual-wrapper,
+  .webdev-visual-wrapper.is-visible,
+  .webdev-floating-card,
+  .webdev-visual-wrapper.is-visible .webdev-floating-card {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .webdev-image-card:hover,
+  .webdev-image-card:hover .webdev-hero-img {
+    transform: none !important;
+  }
+}

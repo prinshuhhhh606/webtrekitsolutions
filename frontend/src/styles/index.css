@@ -2,54 +2,125 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Ultra-Premium Luxury Brand Tokens */
+  --brand-navy-950: #01040d;
+  --brand-navy-900: #020718;
+  --brand-navy-800: #040e2d;
+  --brand-navy-700: #091a4a;
+  --brand-navy-600: #10296b;
+
+  --brand-orange-400: #ffaa33;
+  --brand-orange-500: #ff9500;
+  --brand-orange-600: #fe8a04;
+  --brand-orange-700: #ff5e13;
+  --brand-orange-800: #e03b00;
+
+  --surface-page: #f8fafc;
+  --surface-card: #ffffff;
+  --border-subtle: rgba(226, 232, 240, 0.85);
+
+  --shadow-card: 0 4px 20px -2px rgba(4, 14, 45, 0.05), 0 2px 6px -1px rgba(4, 14, 45, 0.02);
+  --shadow-hover: 0 20px 40px -15px rgba(254, 138, 4, 0.18), 0 0 0 1px rgba(254, 138, 4, 0.18);
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+  
   body {
     overflow-x: hidden;
+    background-color: var(--surface-page);
+    color: #1e293b;
+    selection-background-color: #fe8a04;
+    selection-color: #ffffff;
+  }
+
+  ::selection {
+    background: #fe8a04;
+    color: #ffffff;
   }
 }
 
-/* Custom premium styling */
+/* Custom Ultra-Premium Text Gradients */
 .gradient-text-orange {
-  background: linear-gradient(135deg, #fe8a04 0%, #ff5e13 100%);
+  background: linear-gradient(135deg, #ff9500 0%, #ff5e13 60%, #e03b00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 16px rgba(254, 138, 4, 0.25));
 }
 
 .gradient-text-navy {
-  background: linear-gradient(135deg, #021343 0%, #0a1d59 100%);
+  background: linear-gradient(135deg, #020718 0%, #040e2d 50%, #091a4a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Glassmorphism Surface Cards */
 .glass-card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 30px -10px rgba(4, 14, 45, 0.07);
 }
 
 .dark-glass-card {
-  background: rgba(2, 19, 67, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(254, 138, 4, 0.15);
+  background: rgba(4, 14, 45, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(254, 138, 4, 0.2);
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.5), 0 0 25px rgba(254, 138, 4, 0.08);
 }
 
-/* Custom scrollbar */
+/* Premium Card with Elevated Hover */
+.premium-card {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: var(--shadow-card);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.premium-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(254, 138, 4, 0.35);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Ambient Accent Glow Pills */
+.ambient-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  background: rgba(254, 138, 4, 0.1);
+  border: 1px solid rgba(254, 138, 4, 0.3);
+  color: #fe8a04;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 0 0 15px rgba(254, 138, 4, 0.12);
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #020718;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
+  background: linear-gradient(180deg, #ff9500 0%, #ff5e13 100%);
+  border-radius: 9999px;
+  border: 2px solid #020718;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #fe8a04;
+  background: #ffaa33;
 }
-

@@ -1,6 +1,6 @@
 /* ServicesPage Component Styles */
 .services-hero-banner {
-  background-color: #021343;
+  background-color: #01040f;
   color: #ffffff;
   padding-top: 5rem;
   padding-bottom: 5rem;
@@ -9,24 +9,85 @@
   overflow: hidden;
 }
 
+/* Service Feature Cards - Premium Floating & Elevation Animations */
 .service-feature-card {
-  border-radius: 1.5rem;
-  padding: 2.5rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1.75rem;
+  padding: 2.75rem;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 30px -5px rgba(4, 14, 45, 0.06);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.45s ease;
+  position: relative;
+  will-change: transform, box-shadow;
+  animation: serviceFeatureFloat 6s ease-in-out infinite;
+}
+
+/* Staggered Organic Floating Intervals */
+.service-feature-card-1 {
+  animation: serviceFeatureFloat 6s ease-in-out infinite 0s;
+}
+
+.service-feature-card-2 {
+  animation: serviceFeatureFloat 6.6s ease-in-out infinite 1s;
+}
+
+.service-feature-card-3 {
+  animation: serviceFeatureFloat 6.2s ease-in-out infinite 2s;
+}
+
+.service-feature-card-4 {
+  animation: serviceFeatureFloat 6.8s ease-in-out infinite 3s;
+}
+
+.service-feature-card-5 {
+  animation: serviceFeatureFloat 6.4s ease-in-out infinite 4s;
+}
+
+@keyframes serviceFeatureFloat {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 10px 30px -5px rgba(4, 14, 45, 0.06);
+  }
+  50% {
+    transform: translateY(-9px);
+    box-shadow: 0 24px 50px -8px rgba(254, 138, 4, 0.16), 0 0 20px rgba(254, 138, 4, 0.08);
+  }
 }
 
 .service-feature-card:hover {
-  border-color: rgba(254, 138, 4, 0.4);
-  box-shadow: 0 20px 40px -15px rgba(254, 138, 4, 0.15);
+  animation-play-state: paused;
+  border-color: rgba(254, 138, 4, 0.6);
+  box-shadow: 0 30px 65px -12px rgba(254, 138, 4, 0.28), 0 0 25px rgba(254, 138, 4, 0.18);
+  transform: translateY(-14px) scale(1.015);
 }
 
 .service-feature-card.alt {
-  background-color: #f8fafc;
+  background-color: #fafbfc;
 }
 
 .service-feature-card:not(.alt) {
   background-color: #ffffff;
 }
 
+/* Floating Image Accent Container inside each Service Card */
+.service-img-container {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.service-feature-card:hover .service-img-container {
+  transform: scale(1.03);
+  box-shadow: 0 20px 40px -10px rgba(2, 19, 67, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-feature-card,
+  .service-feature-card:hover,
+  .service-img-container {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

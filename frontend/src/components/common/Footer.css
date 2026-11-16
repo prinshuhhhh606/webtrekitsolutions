@@ -1,70 +1,94 @@
-/* Footer Component Styles */
+/* ==========================================================================
+   Footer.css - Ultra-Premium Midnight Galactic Footer
+   ========================================================================== */
+
 .footer-container {
-  background-color: #021343;
-  color: #cbd5e1;
-  padding-top: 4.5rem;
-  padding-bottom: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: radial-gradient(ellipse at 50% -10%, #0e1e47 0%, #030818 55%, #01040d 100%);
+  color: #94a3b8;
+  padding-top: 5rem;
+  padding-bottom: 2.5rem;
+  border-top: 1px solid rgba(254, 138, 4, 0.15);
   position: relative;
   overflow: hidden;
 }
 
+/* Ambient Radiant Neon Glow Orbs */
 .footer-glow-1 {
   position: absolute;
   top: 0;
   right: 0;
-  width: 24rem;
-  height: 24rem;
-  background-color: rgba(254, 138, 4, 0.08);
+  width: 32rem;
+  height: 32rem;
+  background: radial-gradient(circle, rgba(254, 138, 4, 0.12) 0%, transparent 70%);
   border-radius: 9999px;
-  filter: blur(64px);
+  filter: blur(80px);
   pointer-events: none;
-  margin-right: -10rem;
-  margin-top: -10rem;
+  margin-right: -12rem;
+  margin-top: -12rem;
 }
 
 .footer-glow-2 {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 24rem;
-  height: 24rem;
-  background-color: rgba(37, 99, 235, 0.08);
+  width: 32rem;
+  height: 32rem;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
   border-radius: 9999px;
-  filter: blur(64px);
+  filter: blur(80px);
   pointer-events: none;
-  margin-left: -10rem;
-  margin-bottom: -10rem;
+  margin-left: -12rem;
+  margin-bottom: -12rem;
 }
 
+/* Column Headings */
 .footer-title {
   color: #ffffff;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: 0.025em;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
+  gap: 0.6rem;
+  margin-bottom: 1.35rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .footer-bullet {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.55rem;
+  height: 0.55rem;
   border-radius: 9999px;
-  background-color: #fe8a04;
+  background: linear-gradient(135deg, #ff9500 0%, #ff5e13 100%);
+  box-shadow: 0 0 10px #fe8a04, 0 0 18px rgba(255, 94, 19, 0.5);
+  display: inline-block;
 }
 
+/* Link Elements */
 .footer-link {
   color: #94a3b8;
-  font-size: 0.875rem;
+  font-size: 0.88rem;
   display: inline-block;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
 }
 
 .footer-link:hover {
-  color: #fe8a04;
-  transform: translateX(4px);
+  color: #ff9d2b;
+  transform: translateX(6px);
+  text-shadow: 0 0 12px rgba(254, 138, 4, 0.35);
 }
 
+/* Contact List Items */
+.footer-container a {
+  transition: all 0.2s ease;
+}
+
+.footer-container a:hover {
+  color: #ff9d2b !important;
+}
+
+/* Divider & Bottom Copyright */
+.footer-container .border-b {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}

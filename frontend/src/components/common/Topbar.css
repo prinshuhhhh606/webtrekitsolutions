@@ -1,11 +1,15 @@
-/* Topbar Component Styles */
+/* ==========================================================================
+   Topbar.css - Ultra-Premium Top Announcement & Contact Bar
+   ========================================================================== */
+
 .topbar-wrapper {
-  background-color: #021343;
-  color: #cbd5e1;
+  background: #030919;
+  color: #94a3b8;
   font-size: 0.75rem;
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  letter-spacing: 0.01em;
 }
 
 .topbar-container {
@@ -25,17 +29,18 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: color 0.2s ease;
+  color: #cbd5e1;
+  transition: all 0.2s ease;
 }
 
 .topbar-item:hover {
-  color: #fe8a04;
+  color: #ff9d2b;
 }
 
 .topbar-icon {
   width: 0.875rem;
   height: 0.875rem;
-  color: #fe8a04;
+  color: #ff9500;
   flex-shrink: 0;
+  filter: drop-shadow(0 0 4px rgba(254, 138, 4, 0.5));
 }
-

@@ -1,6 +1,9 @@
-/* ProjectsPage Component Styles */
+/* ==========================================================================
+   ProjectsPage.css - Premium Projects Layout & Hover Animations
+   ========================================================================== */
+
 .projects-hero-banner {
-  background-color: #021343;
+  background-color: #01040f;
   color: #ffffff;
   padding-top: 5rem;
   padding-bottom: 5rem;
@@ -11,32 +14,130 @@
 
 .easy-step-box {
   background-color: #ffffff;
-  padding: 2rem;
+  padding: 2.25rem 2rem;
   border-radius: 1.5rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 20px -2px rgba(4, 14, 45, 0.05);
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .easy-step-box:hover {
-  border-color: rgba(254, 138, 4, 0.4);
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px -5px rgba(254, 138, 4, 0.12);
+  border-color: rgba(254, 138, 4, 0.45);
+  transform: translateY(-6px);
+  box-shadow: 0 22px 45px -12px rgba(254, 138, 4, 0.22), 0 0 0 1px rgba(254, 138, 4, 0.15);
 }
 
+/* 1. Project Card Container */
 .project-item-card {
-  background-color: #f8fafc;
+  position: relative;
+  background-color: #ffffff;
   border-radius: 1.5rem;
   overflow: hidden;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 20px -2px rgba(4, 14, 45, 0.05);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
 }
 
+/* 1.1 Card Hover Lift (6-10px lift & max 1.02 scale) */
 .project-item-card:hover {
-  border-color: rgba(254, 138, 4, 0.4);
-  box-shadow: 0 20px 40px -15px rgba(254, 138, 4, 0.15);
-  transform: translateY(-4px);
+  transform: translateY(-8px) scale(1.015);
+  border-color: rgba(254, 138, 4, 0.45);
+  box-shadow: 0 24px 48px -12px rgba(4, 14, 45, 0.18), 0 0 0 1px rgba(254, 138, 4, 0.22);
 }
 
+/* 2. Project Image Wrapper & Zoom Animation */
+.project-item-card .project-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.project-item-card .project-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Smooth Image Zoom (1.06 - 1.10) */
+.project-item-card:hover .project-img-wrapper img {
+  transform: scale(1.08);
+}
+
+/* 3. Subtle Dark Gradient Overlay on Image Hover */
+.project-item-card .project-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(3, 10, 33, 0.7) 100%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.project-item-card:hover .project-img-overlay {
+  opacity: 1;
+}
+
+/* 4. Project Card Title & Details */
+.project-card-title {
+  transition: color 0.3s ease;
+}
+
+.project-item-card:hover .project-card-title {
+  color: #021343;
+}
+
+/* 5. Buttons Hover Animation */
+.project-view-btn {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-view-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(2, 19, 67, 0.2);
+}
+
+.project-live-btn {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-live-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(254, 138, 4, 0.5);
+  box-shadow: 0 4px 12px rgba(254, 138, 4, 0.2);
+}
+
+.project-similar-btn {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-similar-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(254, 138, 4, 0.45);
+}
+
+.project-similar-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* 6. Accessibility - prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .project-item-card,
+  .project-item-card:hover,
+  .project-item-card .project-img-wrapper img,
+  .project-item-card:hover .project-img-wrapper img,
+  .project-view-btn,
+  .project-view-btn:hover,
+  .project-similar-btn,
+  .project-similar-btn:hover {
+    transform: none !important;
+    transition: none !important;
+  }
+}

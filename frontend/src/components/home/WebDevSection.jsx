@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle, ArrowRight, Zap, Code } from 'lucide-react';
+import { CheckCircle, ArrowRight, Zap, Code, Sparkles } from 'lucide-react';
 import { useWebsite } from '../../context/WebsiteContext';
 import './WebDevSection.css';
 
 const WebDevSection = () => {
   const { openEnquiryModal } = useWebsite();
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const features = [
     {
@@ -30,25 +50,43 @@ const WebDevSection = () => {
     <section className="webdev-section-wrapper">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Visual */}
+          {/* Left Column: Visual with Scroll-Triggered Entrance Animation */}
           <div className="lg:col-span-6 relative">
-            <div className="webdev-image-card">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80"
-                alt="Web Development Architecture"
-                className="w-full h-[400px] object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#021343]/90 via-transparent to-transparent" />
+            <div
+              ref={sectionRef}
+              className={`webdev-visual-wrapper ${isVisible ? 'is-visible' : ''}`}
+            >
+              {/* Radiant Ambient Glow Behind Card */}
+              <div className="webdev-ambient-glow" />
 
-              <div className="absolute bottom-6 left-6 right-6 text-white p-4 rounded-2xl bg-[#021343]/85 backdrop-blur-md border border-white/10">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-xs uppercase text-[#fe8a04] font-bold">All In One Package</span>
-                    <h4 className="font-heading font-bold text-lg">Smart Digital Solutions</h4>
+              <div className="webdev-image-card">
+                <img
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80"
+                  alt="Web Development Architecture"
+                  className="w-full h-[400px] sm:h-[440px] object-cover webdev-hero-img"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#021343]/90 via-[#021343]/30 to-transparent pointer-events-none" />
+
+                {/* Floating All-in-One Package Card with Staggered Entrance & Ambient Float */}
+                <div className="webdev-floating-card absolute bottom-6 left-6 right-6 text-white p-5 rounded-2xl">
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <Sparkles className="w-3.5 h-3.5 text-[#fe8a04]" />
+                        <span className="text-xs uppercase text-[#fe8a04] font-extrabold tracking-wider">
+                          All In One Package
+                        </span>
+                      </div>
+                      <h4 className="font-heading font-extrabold text-lg sm:text-xl text-white tracking-tight">
+                        Smart Digital Solutions
+                      </h4>
+                    </div>
+                    <span className="px-3.5 py-1.5 bg-emerald-500/20 text-emerald-300 text-xs font-bold rounded-full border border-emerald-500/35 shrink-0 shadow-sm flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      <span>24 Hours Online</span>
+                    </span>
                   </div>
-                  <span className="px-3 py-1 bg-green-500/20 text-green-300 text-xs font-bold rounded-full border border-green-500/30">
-                    24 Hours Online
-                  </span>
                 </div>
               </div>
             </div>

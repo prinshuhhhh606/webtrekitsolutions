@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import HeroSection from '../components/home/HeroSection';
 import WebDevSection from '../components/home/WebDevSection';
 import AboutSection from '../components/home/AboutSection';
+import HomeProjectsSection from '../components/home/HomeProjectsSection';
 import BusinessValue from '../components/home/BusinessValue';
 import AchievementCounters from '../components/home/AchievementCounters';
 import TeamSection from '../components/home/TeamSection';
@@ -20,6 +21,7 @@ const HomePage = () => {
       <HeroSection />
       <AboutSection />
       <WebDevSection />
+      <HomeProjectsSection />
       <BusinessValue />
       <AchievementCounters />
       <TeamSection />

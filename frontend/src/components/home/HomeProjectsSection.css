@@ -1,0 +1,244 @@
+/* ==========================================================================
+   HomeProjectsSection.css - Center-Focused Coverflow Carousel & Animations
+   ========================================================================== */
+
+:root {
+  --coverflow-card-width: 430px;
+  --coverflow-card-gap: 32px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --coverflow-card-width: 380px;
+    --coverflow-card-gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --coverflow-card-width: 84vw;
+    --coverflow-card-gap: 16px;
+  }
+}
+
+.home-projects-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Navigation Arrow Controls */
+.coverflow-nav-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background-color: #021343;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(2, 19, 67, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.coverflow-nav-btn:hover {
+  background-color: #fe8a04;
+  border-color: #fe8a04;
+  box-shadow: 0 6px 20px rgba(254, 138, 4, 0.5);
+  transform: scale(1.08);
+}
+
+.coverflow-nav-btn:active {
+  transform: scale(0.95);
+}
+
+/* 1. Horizontal Scroll Viewport Container */
+.horizontal-projects-scroll-wrapper,
+.coverflow-carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  overscroll-behavior-x: contain;
+  padding: 1.5rem 0.5rem 2.5rem 0.5rem;
+  cursor: grab;
+  user-select: none;
+}
+
+.horizontal-projects-scroll-wrapper::-webkit-scrollbar,
+.coverflow-carousel-container::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.horizontal-projects-scroll-wrapper:active,
+.coverflow-carousel-container:active {
+  cursor: grabbing;
+}
+
+/* 2. Horizontal Sliding Track */
+.horizontal-projects-track,
+.coverflow-track {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  width: max-content;
+  padding: 0 1rem;
+}
+
+/* 3. Slide Item Base (Coverflow Scaling) */
+.coverflow-slide {
+  flex-shrink: 0;
+  width: var(--coverflow-card-width);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.45s ease,
+              filter 0.45s ease;
+  will-change: transform, opacity;
+}
+
+/* Inactive Slide: Normal/Reduced size and partially visible */
+.coverflow-slide:not(.is-active) {
+  transform: scale(0.88);
+  opacity: 0.65;
+  filter: blur(0.4px);
+  cursor: pointer;
+}
+
+.coverflow-slide:not(.is-active):hover {
+  opacity: 0.88;
+  transform: scale(0.92);
+  filter: none;
+}
+
+/* Active Center Slide: Highlighted, Larger, Soft Shadow */
+.coverflow-slide.is-active {
+  transform: scale(1.06);
+  opacity: 1;
+  z-index: 20;
+  filter: none;
+}
+
+.coverflow-slide.is-active .project-item-card {
+  border-color: rgba(254, 138, 4, 0.6);
+  box-shadow: 0 30px 65px -12px rgba(4, 14, 45, 0.24),
+              0 0 35px -5px rgba(254, 138, 4, 0.28);
+}
+
+/* 4. Project Card Internal Layout */
+.project-item-card {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 20px -2px rgba(4, 14, 45, 0.05);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+}
+
+/* 4.1 Card Image Wrapper & Zoom */
+.project-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.project-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.coverflow-slide:hover .project-img-wrapper img {
+  transform: scale(1.08);
+}
+
+/* 4.2 Dark Gradient Overlay on Image Hover */
+.project-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(3, 10, 33, 0.7) 100%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.coverflow-slide:hover .project-img-overlay {
+  opacity: 1;
+}
+
+/* 4.3 Action Buttons Hover Animations */
+.project-view-btn {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-view-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(2, 19, 67, 0.2);
+}
+
+.project-live-btn {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-live-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(254, 138, 4, 0.5);
+  box-shadow: 0 4px 12px rgba(254, 138, 4, 0.2);
+}
+
+.project-similar-btn {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-similar-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(254, 138, 4, 0.45);
+}
+
+.project-similar-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* 5. Pagination Dot Indicators */
+.coverflow-dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 9999px;
+  background-color: #cbd5e1;
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.coverflow-dot:hover {
+  background-color: #94a3b8;
+}
+
+.coverflow-dot.active {
+  width: 32px;
+  background: linear-gradient(90deg, #ff9500 0%, #ff5e13 100%);
+  box-shadow: 0 0 12px rgba(254, 138, 4, 0.55);
+}
+
+/* 6. Accessibility - prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .coverflow-slide,
+  .coverflow-slide.is-active,
+  .project-img-wrapper img,
+  .coverflow-slide:hover .project-img-wrapper img {
+    transform: none !important;
+    transition: none !important;
+  }
+}
