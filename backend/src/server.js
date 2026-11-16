@@ -3,7 +3,9 @@ try {
   dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
 } catch (e) {}
 
-require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
+require('dotenv').config();
 const http = require('http');
 const app = require('./app');
 const connectDB = require('./config/database');

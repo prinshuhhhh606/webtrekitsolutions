@@ -44,7 +44,9 @@ app.use(
 
 // CORS setup
 const allowedOrigins = [
+  'https://webtrekit-solutions.vercel.app',
   'http://localhost:5173',
+  'http://localhost:3000',
   'http://127.0.0.1:5173',
   process.env.CLIENT_URL,
 ].filter(Boolean);
@@ -53,12 +55,18 @@ app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
+      if (
+        allowedOrigins.indexOf(origin) !== -1 ||
+        origin.endsWith('.vercel.app') ||
+        process.env.NODE_ENV !== 'production'
+      ) {
         return callback(null, true);
       }
       return callback(null, true);
     },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
 
@@ -87,6 +95,16 @@ if (process.env.NODE_ENV !== 'test') {
 
 // Serve uploaded files statically from backend/uploads
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+// Root status for Render health checking
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Webtrek IT Solutions API is live in production.',
+    version: '1.0.0',
+    documentation: '/api/health',
+  });
+});
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
