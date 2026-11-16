@@ -1,0 +1,10 @@
+/* AdminQuotationsPage Component Styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print\:hidden {
+    display: none !important;
+  }
+}
+

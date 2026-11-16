@@ -1,0 +1,8 @@
+# Webtrek IT Solutions - robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://webtrekitsolutions.com/sitemap.xml
+

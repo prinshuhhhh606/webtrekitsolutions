@@ -1,0 +1,66 @@
+/* ==========================================================================
+   AdminDashboardPage.css - Admin Overview & Metric Cards Styling
+   ========================================================================== */
+
+.admin-dash-header {
+  margin-bottom: 2rem;
+}
+
+.admin-dash-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #021343;
+}
+
+.admin-dash-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+.admin-stat-card {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 15px -3px rgba(2, 19, 67, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px -4px rgba(2, 19, 67, 0.1);
+  border-color: #fe8a04;
+}
+
+.admin-stat-icon-wrap {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.admin-stat-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #021343;
+  line-height: 1;
+}
+
+.admin-stat-label {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+

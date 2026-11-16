@@ -1,0 +1,23 @@
+/* TeamSection Component Styles */
+.team-section-wrapper {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.team-card-box {
+  background-color: #f8fafc;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-card-box:hover {
+  border-color: rgba(254, 138, 4, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(254, 138, 4, 0.15);
+  transform: translateY(-4px);
+}
+

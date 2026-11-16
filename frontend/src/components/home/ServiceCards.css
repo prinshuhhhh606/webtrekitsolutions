@@ -1,0 +1,200 @@
+/* ==========================================================================
+   ServiceCards.css - 4-Column Feature Strip matching webtrekitsolutions.in
+   ========================================================================== */
+
+.webtrek-services-strip {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #021343;
+}
+
+.webtrek-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .webtrek-strip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .webtrek-strip-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Single Service Column */
+.webtrek-service-col {
+  position: relative;
+  min-height: 290px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 30px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+@media (min-width: 1280px) {
+  .webtrek-service-col {
+    min-height: 330px;
+    padding: 95px 40px;
+  }
+}
+
+/* Background Image with Zoom on hover */
+.webtrek-service-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.webtrek-service-col:hover .webtrek-service-bg {
+  transform: scale(1.12);
+}
+
+/* Solid/Translucent Overlay */
+.webtrek-service-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: opacity 0.5s ease, background-color 0.5s ease;
+  z-index: 2;
+  opacity: 0.92;
+}
+
+.webtrek-service-col:hover .webtrek-service-overlay {
+  opacity: 0.98;
+}
+
+/* Content Container */
+.webtrek-service-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Subtle Icon Pill */
+.webtrek-service-icon-wrap {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.webtrek-service-col:hover .webtrek-service-icon-wrap {
+  transform: translateY(-4px) scale(1.08);
+  background: #ffffff;
+}
+
+.webtrek-service-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.webtrek-service-col.theme-blue:hover .webtrek-service-icon {
+  color: #314376;
+}
+
+.webtrek-service-col.theme-orange:hover .webtrek-service-icon {
+  color: #f66f0d;
+}
+
+/* Heading Title matching reference */
+.webtrek-service-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.webtrek-service-col:hover .webtrek-service-title {
+  transform: translateY(-2px);
+}
+
+/* Button Wrapper */
+.webtrek-service-btn-wrap {
+  margin-top: 0.5rem;
+}
+
+/* Learn More Button matching elementor reference */
+.webtrek-learn-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.6rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Blue Column Button Style (Theme Blue: #314376 background overlay) */
+.webtrek-learn-more-btn.btn-blue {
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.webtrek-learn-more-btn.btn-blue:hover {
+  background-color: #fe8a04;
+  border-color: #fe8a04;
+  color: #ffffff;
+  box-shadow: 0 8px 20px -4px rgba(254, 138, 4, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Orange Column Button Style (Theme Orange: #F66F0D background overlay) */
+.webtrek-learn-more-btn.btn-orange {
+  background-color: #314376;
+  color: #ffffff;
+  border: 2px solid #314376;
+}
+
+.webtrek-learn-more-btn.btn-orange:hover {
+  background-color: transparent;
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 8px 20px -4px rgba(2, 19, 67, 0.4);
+  transform: translateY(-2px);
+}

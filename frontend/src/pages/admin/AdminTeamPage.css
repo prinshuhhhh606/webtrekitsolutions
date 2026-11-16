@@ -1,0 +1,17 @@
+/* AdminTeamPage.css */
+.admin-team-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  border: 1px solid #f1f5f9;
+  text-align: center;
+}
+
+.admin-team-avatar {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  margin: 0 auto 1rem auto;
+}
+

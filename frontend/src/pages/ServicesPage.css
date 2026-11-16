@@ -1,0 +1,32 @@
+/* ServicesPage Component Styles */
+.services-hero-banner {
+  background-color: #021343;
+  color: #ffffff;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.service-feature-card {
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-feature-card:hover {
+  border-color: rgba(254, 138, 4, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(254, 138, 4, 0.15);
+}
+
+.service-feature-card.alt {
+  background-color: #f8fafc;
+}
+
+.service-feature-card:not(.alt) {
+  background-color: #ffffff;
+}
+

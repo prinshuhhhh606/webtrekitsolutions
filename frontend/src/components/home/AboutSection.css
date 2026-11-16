@@ -1,0 +1,283 @@
+/* ==========================================================================
+   AboutSection.css - Grow Your Business / We Are Perfect Solution
+   Exact layout & styles matching webtrekitsolutions.in
+   ========================================================================== */
+
+.webtrek-perfect-solution-section {
+  padding: 100px 0;
+  background-color: #ffffff;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .webtrek-perfect-solution-section {
+    padding: 60px 0;
+  }
+}
+
+/* Header Grid: 2 Columns (50% / 50%) */
+.webtrek-solution-header-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 992px) {
+  .webtrek-solution-header-grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+  }
+}
+
+.webtrek-solution-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.webtrek-solution-subtitle {
+  font-family: 'Poppins', sans-serif;
+  color: #f66f0d;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.webtrek-solution-title {
+  font-family: 'Poppins', sans-serif;
+  color: #021343;
+  font-size: 2.35rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 1024px) {
+  .webtrek-solution-title {
+    font-size: 2.75rem;
+  }
+}
+
+.webtrek-solution-desc {
+  font-size: 1.05rem;
+  color: #55627a;
+  line-height: 1.8;
+}
+
+.webtrek-solution-desc strong {
+  color: #021343;
+  font-weight: 700;
+}
+
+/* 3 Cards Grid (col-33, col-33, col-33) */
+.webtrek-solution-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .webtrek-solution-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Base Infobox Styling */
+.webtrek-infobox {
+  padding: 50px 36px;
+  border-radius: 8px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.webtrek-infobox-icon-wrap {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  transition: all 0.35s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.webtrek-infobox-icon {
+  width: 2rem;
+  height: 2rem;
+  transition: all 0.35s ease;
+}
+
+.webtrek-infobox-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 1.25rem;
+  transition: color 0.35s ease;
+}
+
+.webtrek-infobox-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  transition: color 0.35s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Card 1 Theme: Navy Blue (#314376)
+   -------------------------------------------------------------------------- */
+.card-theme-blue {
+  background-color: #314376;
+  border: 1px solid #314376;
+}
+
+.card-theme-blue .webtrek-infobox-icon-wrap {
+  background-color: #ffffff;
+  color: #314376;
+}
+
+.card-theme-blue .webtrek-infobox-title {
+  color: #ffffff;
+}
+
+.card-theme-blue .webtrek-infobox-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.card-theme-blue:hover {
+  background-color: #ffffff;
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -10px rgba(49, 67, 118, 0.25);
+  border-color: #e2e8f0;
+}
+
+.card-theme-blue:hover .webtrek-infobox-icon-wrap {
+  background-color: #314376;
+  color: #ffffff;
+}
+
+.card-theme-blue:hover .webtrek-infobox-title {
+  color: #314376;
+}
+
+.card-theme-blue:hover .webtrek-infobox-text {
+  color: #6e6e6e;
+}
+
+/* --------------------------------------------------------------------------
+   Card 2 Theme: Vibrant Orange (#F66F0D)
+   -------------------------------------------------------------------------- */
+.card-theme-orange {
+  background-color: #f66f0d;
+  border: 1px solid #f66f0d;
+}
+
+.card-theme-orange .webtrek-infobox-icon-wrap {
+  background-color: #ffffff;
+  color: #f66f0d;
+}
+
+.card-theme-orange .webtrek-infobox-title {
+  color: #ffffff;
+}
+
+.card-theme-orange .webtrek-infobox-text {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.card-theme-orange:hover {
+  background-color: #ffffff;
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -10px rgba(246, 111, 13, 0.3);
+  border-color: #e2e8f0;
+}
+
+.card-theme-orange:hover .webtrek-infobox-icon-wrap {
+  background-color: #f66f0d;
+  color: #ffffff;
+}
+
+.card-theme-orange:hover .webtrek-infobox-title {
+  color: #314376;
+}
+
+.card-theme-orange:hover .webtrek-infobox-text {
+  color: #6e6e6e;
+}
+
+/* --------------------------------------------------------------------------
+   Card 3 Theme: White / Orange Accent (#FFFFFF / #F66F0D)
+   -------------------------------------------------------------------------- */
+.card-theme-white {
+  background-color: #ffffff;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 10px 30px -5px rgba(2, 19, 67, 0.06);
+}
+
+.card-theme-white .webtrek-infobox-icon-wrap {
+  background-color: #f66f0d;
+  color: #ffffff;
+}
+
+.card-theme-white .webtrek-infobox-title {
+  color: #314376;
+}
+
+.card-theme-white .webtrek-infobox-text {
+  color: #656565;
+}
+
+.card-theme-white:hover {
+  background-color: #314376;
+  border-color: #314376;
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -10px rgba(2, 19, 67, 0.3);
+}
+
+.card-theme-white:hover .webtrek-infobox-icon-wrap {
+  background-color: #ffffff;
+  color: #314376;
+}
+
+.card-theme-white:hover .webtrek-infobox-title {
+  color: #ffffff;
+}
+
+.card-theme-white:hover .webtrek-infobox-text {
+  color: #ffffff;
+}
+
+/* Bottom CTA button */
+.webtrek-solution-cta {
+  margin-top: 3.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.webtrek-solution-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #021343, #1e3a8a);
+  color: #ffffff;
+  padding: 0.9rem 2.2rem;
+  border-radius: 9999px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px rgba(2, 19, 67, 0.3);
+}
+
+.webtrek-solution-btn:hover {
+  background: linear-gradient(135deg, #f66f0d, #fe8a04);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -5px rgba(246, 111, 13, 0.4);
+}

@@ -1,0 +1,45 @@
+/* BusinessValue Component Styles */
+.business-value-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: #021343;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.business-value-card {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.business-value-card:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(254, 138, 4, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px -5px rgba(254, 138, 4, 0.15);
+}
+
+.business-value-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #fe8a04 0%, #ff5e13 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(254, 138, 4, 0.35);
+  transition: transform 0.3s ease;
+}
+
+.business-value-card:hover .business-value-icon {
+  transform: scale(1.1);
+}
+

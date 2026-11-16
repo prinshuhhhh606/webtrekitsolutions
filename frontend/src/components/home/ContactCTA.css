@@ -1,0 +1,26 @@
+/* ContactCTA Component Styles */
+.contact-cta-wrapper {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background: linear-gradient(135deg, #021343 0%, #0a1d59 50%, #021343 100%);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fe8a04;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(254, 138, 4, 0.35);
+  margin-bottom: 1.5rem;
+}
+

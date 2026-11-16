@@ -1,0 +1,9 @@
+/* AdminFAQsPage.css */
+.admin-faq-item {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  border: 1px solid #f1f5f9;
+  margin-bottom: 0.75rem;
+}
+

@@ -1,0 +1,111 @@
+/* ==========================================================================
+   AdminLoginPage.css - Dedicated styling for Admin Login Portal
+   ========================================================================== */
+
+.admin-login-wrapper {
+  min-height: 100vh;
+  background-color: #021343;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-login-glow-1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24rem;
+  height: 24rem;
+  background: rgba(254, 138, 4, 0.15);
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.admin-login-glow-2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24rem;
+  height: 24rem;
+  background: rgba(37, 99, 235, 0.15);
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.admin-login-box {
+  width: 100%;
+  max-width: 28rem;
+  position: relative;
+  z-index: 10;
+}
+
+.admin-login-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.admin-login-logo {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #fe8a04, #ff5e13);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.75rem;
+  margin: 0 auto 1rem auto;
+  box-shadow: 0 10px 25px -5px rgba(254, 138, 4, 0.4);
+}
+
+.admin-login-input {
+  width: 100%;
+  padding-left: 2.75rem;
+  padding-right: 1rem;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0.85rem;
+  font-size: 0.875rem;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.admin-login-input:focus {
+  border-color: #fe8a04;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(254, 138, 4, 0.12);
+}
+
+.admin-login-submit {
+  width: 100%;
+  padding: 0.9rem;
+  background: linear-gradient(135deg, #021343, #0a2569);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.admin-login-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #fe8a04, #ff5e13);
+  box-shadow: 0 10px 20px -5px rgba(254, 138, 4, 0.4);
+}
+

@@ -1,0 +1,9 @@
+/* AdminSettingsPage.css */
+.admin-settings-section {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  border: 1px solid #f1f5f9;
+  margin-bottom: 2rem;
+}
+

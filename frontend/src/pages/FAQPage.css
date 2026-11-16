@@ -1,0 +1,50 @@
+/* FAQPage Component Styles */
+.faqpage-hero-banner {
+  background-color: #021343;
+  color: #ffffff;
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.faqpage-hero-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/images/hero-banner.jpg'),
+    url('https://img.magnific.com/free-photo/young-happy-businesswoman-using-desktop-pc-while-working-office_637285-5143.jpg?semt=ais_hybrid&w=740&q=80');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.faqpage-hero-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(49, 67, 118, 0.82) 0%,
+    rgba(2, 19, 67, 0.88) 60%,
+    rgba(2, 19, 67, 0.96) 100%
+  );
+  z-index: 2;
+}
+
+.faq-card-container {
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+

@@ -1,0 +1,41 @@
+/* Topbar Component Styles */
+.topbar-wrapper {
+  background-color: #021343;
+  color: #cbd5e1;
+  font-size: 0.75rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.topbar-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.topbar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.topbar-item:hover {
+  color: #fe8a04;
+}
+
+.topbar-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #fe8a04;
+  flex-shrink: 0;
+}
+

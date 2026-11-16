@@ -1,0 +1,22 @@
+/* AdminServicesPage.css */
+.admin-crud-container {
+  padding-bottom: 2rem;
+}
+
+.admin-crud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin-crud-table-wrap {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 15px -3px rgba(2, 19, 67, 0.04);
+  overflow: hidden;
+}
+

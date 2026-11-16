@@ -1,0 +1,42 @@
+/* ProjectsPage Component Styles */
+.projects-hero-banner {
+  background-color: #021343;
+  color: #ffffff;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.easy-step-box {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.easy-step-box:hover {
+  border-color: rgba(254, 138, 4, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px -5px rgba(254, 138, 4, 0.12);
+}
+
+.project-item-card {
+  background-color: #f8fafc;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.project-item-card:hover {
+  border-color: rgba(254, 138, 4, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(254, 138, 4, 0.15);
+  transform: translateY(-4px);
+}
+
