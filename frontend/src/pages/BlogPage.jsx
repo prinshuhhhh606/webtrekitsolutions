@@ -6,6 +6,7 @@ import { blogsService } from '../services/api';
 import ContactCTA from '../components/home/ContactCTA';
 import SectionHeader from '../components/common/SectionHeader';
 import PageBanner from '../components/common/PageBanner';
+import { BlogCardSkeleton } from '../components/common/Shimmer';
 import './BlogPage.css';
 
 const defaultBlogPosts = [
@@ -132,9 +133,8 @@ const BlogPage = () => {
           </div>
 
           {loading ? (
-            <div className="py-16 text-center">
-              <Loader2 className="w-8 h-8 text-[#fe8a04] animate-spin mx-auto mb-2" />
-              <p className="text-xs text-gray-500 font-medium">Loading published articles...</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <BlogCardSkeleton count={6} />
             </div>
           ) : filteredBlogs.length === 0 ? (
             <div className="py-16 text-center space-y-3">
@@ -145,7 +145,7 @@ const BlogPage = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 content-fade-in">
               {filteredBlogs.map((post) => (
                 <article key={post._id || post.id} className="blog-article-card flex flex-col justify-between">
                   <div>

@@ -15,6 +15,7 @@ import {
 import { blogsService } from '../services/api';
 import { useWebsite } from '../context/WebsiteContext';
 import ContactCTA from '../components/home/ContactCTA';
+import { ImageSkeleton, TextSkeleton, Shimmer } from '../components/common/Shimmer';
 import './BlogDetailsPage.css';
 
 const BlogDetailsPage = () => {
@@ -54,11 +55,23 @@ const BlogDetailsPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[70vh] flex flex-col items-center justify-center bg-white space-y-3">
-        <Loader2 className="w-10 h-10 text-[#fe8a04] animate-spin" />
-        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-          Loading Article...
-        </p>
+      <div className="min-h-screen bg-[#fafbfc] py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="space-y-4">
+            <Shimmer width="120px" height="24px" borderRadius="999px" />
+            <Shimmer width="85%" height="40px" borderRadius="8px" />
+            <div className="flex gap-4">
+              <Shimmer width="100px" height="18px" />
+              <Shimmer width="100px" height="18px" />
+            </div>
+          </div>
+          <ImageSkeleton height="400px" borderRadius="16px" />
+          <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+            <TextSkeleton count={4} />
+            <Shimmer width="60%" height="28px" borderRadius="6px" />
+            <TextSkeleton count={5} />
+          </div>
+        </div>
       </div>
     );
   }

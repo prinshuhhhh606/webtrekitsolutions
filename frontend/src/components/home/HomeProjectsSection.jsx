@@ -4,6 +4,7 @@ import { ArrowRight, Eye, ExternalLink, Sparkles } from 'lucide-react';
 import { useWebsite } from '../../context/WebsiteContext';
 import { projectsService } from '../../services/api';
 import SectionHeader from '../common/SectionHeader';
+import { ProjectCardSkeleton } from '../common/Shimmer';
 import './HomeProjectsSection.css';
 
 const defaultFeatured = [
@@ -71,6 +72,7 @@ const defaultFeatured = [
 
 const HomeProjectsSection = () => {
   const [projects, setProjects] = useState(defaultFeatured);
+  const [loading, setLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const { openEnquiryModal } = useWebsite();
 
@@ -91,6 +93,8 @@ const HomeProjectsSection = () => {
         }
       } catch (err) {
         // Fallback to defaultFeatured
+      } finally {
+        setLoading(false);
       }
     };
     fetchProjects();
@@ -206,123 +210,129 @@ const HomeProjectsSection = () => {
           onMouseLeave={handleMouseLeave}
           className="horizontal-projects-scroll-wrapper"
         >
-          <div className="horizontal-projects-track">
-            {projects.map((project, idx) => {
-              const isCenter = idx === activeIndex;
+          {loading ? (
+            <div className="horizontal-projects-track">
+              <ProjectCardSkeleton count={4} />
+            </div>
+          ) : (
+            <div className="horizontal-projects-track content-fade-in">
+              {projects.map((project, idx) => {
+                const isCenter = idx === activeIndex;
 
-              return (
-                <div
-                  key={project._id || project.id}
-                  onClick={() => {
-                    if (!isDraggingState.current && !isCenter) {
-                      scrollToCard(idx);
-                    }
-                  }}
-                  className={`coverflow-slide ${isCenter ? 'is-active' : ''}`}
-                >
-                  <div className="project-item-card flex flex-col justify-between h-full">
-                    <div>
-                      {/* Project Image Container with Overflow Hidden for Zoom Animation */}
-                      <div className="project-img-wrapper relative h-60 w-full overflow-hidden bg-gray-200">
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          draggable={false}
-                        />
+                return (
+                  <div
+                    key={project._id || project.id}
+                    onClick={() => {
+                      if (!isDraggingState.current && !isCenter) {
+                        scrollToCard(idx);
+                      }
+                    }}
+                    className={`coverflow-slide ${isCenter ? 'is-active' : ''}`}
+                  >
+                    <div className="project-item-card flex flex-col justify-between h-full">
+                      <div>
+                        {/* Project Image Container with Overflow Hidden for Zoom Animation */}
+                        <div className="project-img-wrapper relative h-60 w-full overflow-hidden bg-gray-200">
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                            draggable={false}
+                          />
 
-                        {/* Dark Gradient Overlay */}
-                        <div className="project-img-overlay" />
+                          {/* Dark Gradient Overlay */}
+                          <div className="project-img-overlay" />
 
-                        {/* Category Badge */}
-                        <div className="absolute top-4 left-4 bg-[#021343]/90 text-[#fe8a04] text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-sm z-10">
-                          {project.category}
+                          {/* Category Badge */}
+                          <div className="absolute top-4 left-4 bg-[#021343]/90 text-[#fe8a04] text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-sm z-10">
+                            {project.category}
+                          </div>
+
+                          {/* Price Tag */}
+                          <div className="absolute bottom-4 right-4 bg-gradient-to-r from-[#fe8a04] to-[#ff5e13] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10">
+                            {project.price || '$65'}
+                          </div>
                         </div>
 
-                        {/* Price Tag */}
-                        <div className="absolute bottom-4 right-4 bg-gradient-to-r from-[#fe8a04] to-[#ff5e13] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10">
-                          {project.price || '$65'}
+                        {/* Content */}
+                        <div className="p-6">
+                          <h3 className="project-card-title font-heading font-bold text-xl text-[#021343] mb-3 leading-snug line-clamp-2">
+                            {project.title}
+                          </h3>
+                          <p className="project-card-desc text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                            {project.description || project.shortDescription}
+                          </p>
                         </div>
                       </div>
 
-                      {/* Content */}
-                      <div className="p-6">
-                        <h3 className="project-card-title font-heading font-bold text-xl text-[#021343] mb-3 leading-snug line-clamp-2">
-                          {project.title}
-                        </h3>
-                        <p className="project-card-desc text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
-                          {project.description || project.shortDescription}
-                        </p>
-                      </div>
-                    </div>
+                      {/* Action Buttons */}
+                      <div className="p-6 pt-0 border-t border-gray-100 space-y-3 mt-auto">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold uppercase tracking-wider text-gray-500">
+                            Starting Package
+                          </span>
+                          <span className="text-base font-extrabold text-[#021343]">
+                            {project.price || '$65'}
+                          </span>
+                        </div>
 
-                    {/* Action Buttons */}
-                    <div className="p-6 pt-0 border-t border-gray-100 space-y-3 mt-auto">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                          Starting Package
-                        </span>
-                        <span className="text-base font-extrabold text-[#021343]">
-                          {project.price || '$65'}
-                        </span>
-                      </div>
-
-                      <div className="flex flex-wrap items-center gap-2 pt-1">
-                        <Link
-                          to={`/our-project/${project.slug || project._id || project.id}`}
-                          onClick={(e) => {
-                            if (isDraggingState.current) e.preventDefault();
-                          }}
-                          className="project-view-btn flex-1 min-w-[100px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold text-[#021343] bg-gray-100 hover:bg-[#021343] hover:text-white transition-all cursor-pointer border border-gray-200"
-                          title="View Project Case Study"
-                        >
-                          <Eye className="w-3.5 h-3.5" />
-                          <span>View Details</span>
-                        </Link>
-
-                        {project.liveUrl && (
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <div className="flex flex-wrap items-center gap-2 pt-1">
+                          <Link
+                            to={`/our-project/${project.slug || project._id || project.id}`}
                             onClick={(e) => {
                               if (isDraggingState.current) e.preventDefault();
                             }}
-                            className="project-live-btn inline-flex items-center justify-center p-2.5 rounded-xl text-gray-600 bg-white hover:bg-gray-100 hover:text-[#021343] transition-all cursor-pointer border border-gray-200"
-                            title="Visit Live Website"
+                            className="project-view-btn flex-1 min-w-[100px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold text-[#021343] bg-gray-100 hover:bg-[#021343] hover:text-white transition-all cursor-pointer border border-gray-200"
+                            title="View Project Case Study"
                           >
-                            <ExternalLink className="w-3.5 h-3.5 text-[#fe8a04]" />
-                          </a>
-                        )}
+                            <Eye className="w-3.5 h-3.5" />
+                            <span>View Details</span>
+                          </Link>
 
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (isDraggingState.current) return;
-                            openEnquiryModal({
-                              enquiryType: 'Project',
-                              relatedProject: project.title,
-                              service: project.category?.includes('Marketing')
-                                ? 'Digital Marketing'
-                                : project.category?.includes('Web')
-                                ? 'Website Development'
-                                : 'Business Consultancy',
-                              sourcePage: `Home Featured Projects - ${project.title}`,
-                            });
-                          }}
-                          className="project-similar-btn flex-1 min-w-[120px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#fe8a04] to-[#ff5e13] hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shadow-sm"
-                        >
-                          <span>Similar Project</span>
-                          <ArrowRight className="w-3.5 h-3.5 transition-transform" />
-                        </button>
+                          {project.liveUrl && (
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => {
+                                if (isDraggingState.current) e.preventDefault();
+                              }}
+                              className="project-live-btn inline-flex items-center justify-center p-2.5 rounded-xl text-gray-600 bg-white hover:bg-gray-100 hover:text-[#021343] transition-all cursor-pointer border border-gray-200"
+                              title="Visit Live Website"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5 text-[#fe8a04]" />
+                            </a>
+                          )}
+
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (isDraggingState.current) return;
+                              openEnquiryModal({
+                                enquiryType: 'Project',
+                                relatedProject: project.title,
+                                service: project.category?.includes('Marketing')
+                                  ? 'Digital Marketing'
+                                  : project.category?.includes('Web')
+                                  ? 'Website Development'
+                                  : 'Business Consultancy',
+                                sourcePage: `Home Featured Projects - ${project.title}`,
+                              });
+                            }}
+                            className="project-similar-btn flex-1 min-w-[120px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#fe8a04] to-[#ff5e13] hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shadow-sm"
+                          >
+                            <span>Similar Project</span>
+                            <ArrowRight className="w-3.5 h-3.5 transition-transform" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Interactive Dot Indicators */}

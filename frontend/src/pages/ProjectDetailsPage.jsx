@@ -15,6 +15,7 @@ import {
 import { projectsService } from '../services/api';
 import { useWebsite } from '../context/WebsiteContext';
 import ContactCTA from '../components/home/ContactCTA';
+import { ImageSkeleton, TextSkeleton, Shimmer } from '../components/common/Shimmer';
 import './ProjectDetailsPage.css';
 
 const ProjectDetailsPage = () => {
@@ -56,11 +57,44 @@ const ProjectDetailsPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[70vh] flex flex-col items-center justify-center bg-white space-y-3">
-        <Loader2 className="w-10 h-10 text-[#fe8a04] animate-spin" />
-        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-          Loading Project Case Study...
-        </p>
+      <div className="min-h-screen bg-[#fafbfc] py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="space-y-4">
+            <Shimmer width="130px" height="24px" borderRadius="999px" />
+            <Shimmer width="70%" height="42px" borderRadius="8px" />
+            <div className="flex gap-4">
+              <Shimmer width="110px" height="20px" />
+              <Shimmer width="110px" height="20px" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div className="lg:col-span-8 space-y-6">
+              <ImageSkeleton height="420px" borderRadius="16px" />
+              <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-5">
+                <Shimmer width="40%" height="28px" borderRadius="6px" />
+                <TextSkeleton count={5} />
+                <div className="pt-4 space-y-3">
+                  <Shimmer width="90%" height="18px" />
+                  <Shimmer width="85%" height="18px" />
+                  <Shimmer width="80%" height="18px" />
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-4 space-y-6">
+              <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-5">
+                <Shimmer width="60%" height="24px" borderRadius="6px" />
+                <div className="space-y-3">
+                  <Shimmer width="100%" height="40px" borderRadius="10px" />
+                  <Shimmer width="100%" height="40px" borderRadius="10px" />
+                  <Shimmer width="100%" height="40px" borderRadius="10px" />
+                </div>
+                <Shimmer width="100%" height="48px" borderRadius="12px" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
