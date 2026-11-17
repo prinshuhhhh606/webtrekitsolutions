@@ -17,6 +17,7 @@ import {
   Building2,
 } from 'lucide-react';
 import { quotationsService, enquiriesService } from '../../services/api';
+import { formatINR } from '../../utils/currency';
 import './AdminQuotationsPage.css';
 
 const quotationStatuses = ['All', 'Draft', 'Sent', 'Accepted', 'Rejected'];
@@ -301,7 +302,7 @@ const AdminQuotationsPage = () => {
                       <div className="text-[11px] text-gray-400">{q.items?.length || 0} line items</div>
                     </td>
                     <td className="py-4 px-6 font-black text-[#fe8a04] text-sm">
-                      ₹{q.total?.toLocaleString('en-IN')}
+                      {formatINR(q.total)}
                     </td>
                     <td className="py-4 px-6">
                       <select
@@ -512,7 +513,7 @@ const AdminQuotationsPage = () => {
                 <div className="p-3 bg-[#021343] text-white rounded-xl flex flex-col justify-center">
                   <span className="text-[10px] text-gray-300 font-medium">Grand Total (Inc. Tax)</span>
                   <span className="text-lg font-black text-[#fe8a04]">
-                    ₹{calculateTotal().toLocaleString('en-IN')}
+                    {formatINR(calculateTotal())}
                   </span>
                 </div>
               </div>
@@ -637,8 +638,8 @@ const AdminQuotationsPage = () => {
                       <tr key={idx}>
                         <td className="py-3 px-3 font-medium text-gray-800">{item.description}</td>
                         <td className="py-3 px-3 text-center">{item.quantity}</td>
-                        <td className="py-3 px-3 text-right">₹{item.price?.toLocaleString('en-IN')}</td>
-                        <td className="py-3 px-3 text-right font-bold">₹{item.amount?.toLocaleString('en-IN')}</td>
+                        <td className="py-3 px-3 text-right">{formatINR(item.price)}</td>
+                        <td className="py-3 px-3 text-right font-bold">{formatINR(item.amount)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -650,15 +651,15 @@ const AdminQuotationsPage = () => {
                 <div className="w-64 space-y-1.5 text-xs text-right border-t pt-2">
                   <div className="flex justify-between text-gray-600">
                     <span>Subtotal:</span>
-                    <span className="font-bold">₹{selectedQuotation.subtotal?.toLocaleString('en-IN')}</span>
+                    <span className="font-bold">{formatINR(selectedQuotation.subtotal)}</span>
                   </div>
                   <div className="flex justify-between text-gray-600">
                     <span>GST ({selectedQuotation.taxPercent}%):</span>
-                    <span className="font-bold">₹{selectedQuotation.taxAmount?.toLocaleString('en-IN')}</span>
+                    <span className="font-bold">{formatINR(selectedQuotation.taxAmount)}</span>
                   </div>
                   <div className="flex justify-between text-sm font-black text-[#021343] border-t pt-1.5">
                     <span>Grand Total:</span>
-                    <span className="text-[#fe8a04]">₹{selectedQuotation.total?.toLocaleString('en-IN')}</span>
+                    <span className="text-[#fe8a04]">{formatINR(selectedQuotation.total)}</span>
                   </div>
                 </div>
               </div>

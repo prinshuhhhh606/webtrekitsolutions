@@ -5,7 +5,12 @@ import { useWebsite } from '../../context/WebsiteContext';
 import './Footer.css';
 
 const Footer = () => {
-  const { settings, openEnquiryModal } = useWebsite();
+  const { settings, websiteName, openEnquiryModal } = useWebsite();
+
+  const brandParts = (websiteName || settings.companyName || 'Webtrek IT Solutions').trim().split(' ');
+  const brandFirst = brandParts[0] || 'WEBTREK';
+  const brandRest = brandParts.slice(1).join(' ') || 'IT Solutions';
+  const displayName = websiteName || settings.companyName || 'Webtrek IT Solutions';
 
   const servicesList = [
     { name: 'Website Development', path: '/our-services' },
@@ -38,20 +43,22 @@ const Footer = () => {
           <div className="lg:col-span-2 space-y-5">
             <Link to="/" className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#fe8a04] to-[#ff5e13] flex items-center justify-center text-white font-bold text-xl shadow-glow-orange">
-                <span className="font-heading">W</span>
+                <span className="font-heading">{brandFirst.charAt(0).toUpperCase()}</span>
               </div>
               <div className="flex flex-col">
                 <span className="font-heading font-extrabold text-2xl text-white tracking-tight leading-none">
-                  WEBTREK<span className="text-[#fe8a04]">.</span>
+                  {brandFirst.toUpperCase()}<span className="text-[#fe8a04]">.</span>
                 </span>
-                <span className="text-[10px] uppercase tracking-widest text-gray-300 font-medium">
-                  IT Solutions
-                </span>
+                {brandRest && (
+                  <span className="text-[10px] uppercase tracking-widest text-gray-300 font-medium">
+                    {brandRest}
+                  </span>
+                )}
               </div>
             </Link>
 
             <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
-              Webtrek IT Solutions is a tech company specializing in innovative IT services and digital solutions. It offers web development, software solutions, mobile app development, digital marketing, and IT consulting, helping businesses grow through technology-driven strategies.
+              {displayName} is a tech company specializing in innovative IT services and digital solutions. It offers web development, software solutions, mobile app development, digital marketing, and IT consulting, helping businesses grow through technology-driven strategies.
             </p>
 
             <div className="pt-2">
@@ -138,7 +145,7 @@ const Footer = () => {
 
         {/* Bottom bar with exact copyright text */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
-          <p>© 2025 WebTrek IT Solutions. All rights reserved. | Empowering businesses with smart IT solutions.</p>
+          <p>© {new Date().getFullYear()} {displayName}. All rights reserved. | Empowering businesses with smart IT solutions.</p>
           <div className="flex items-center gap-6">
             <Link to="/about-us" className="hover:text-white transition-colors">About Us</Link>
             <Link to="/contact-us" className="hover:text-white transition-colors">Contact</Link>

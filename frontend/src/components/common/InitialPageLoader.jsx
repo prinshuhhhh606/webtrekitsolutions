@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useWebsite } from '../../context/WebsiteContext';
 import './InitialPageLoader.css';
 
 const InitialPageLoader = () => {
   const [loading, setLoading] = useState(true);
   const [fadingOut, setFadingOut] = useState(false);
+  const { websiteName } = useWebsite();
+
+  const brandParts = (websiteName || 'Webtrek IT Solutions').trim().split(' ');
+  const brandFirst = brandParts[0] || 'WEBTREK';
+  const brandRest = brandParts.slice(1).join(' ') || 'IT Solutions & Digital Agency';
 
   useEffect(() => {
     // Check if initial loader has already been shown during this tab session
@@ -32,12 +38,12 @@ const InitialPageLoader = () => {
       <div className="ipl-ambient-glow" />
       <div className="ipl-content">
         <div className="ipl-logo-badge">
-          <span className="ipl-logo-letter">W</span>
+          <span className="ipl-logo-letter">{brandFirst.charAt(0).toUpperCase()}</span>
         </div>
         <h1 className="ipl-brand-name">
-          WEBTREK<span>.</span>
+          {brandFirst.toUpperCase()}<span>.</span>
         </h1>
-        <p className="ipl-tagline">IT Solutions & Digital Agency</p>
+        <p className="ipl-tagline">{brandRest}</p>
 
         <div className="ipl-progress-track">
           <div className="ipl-progress-bar" />

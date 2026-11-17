@@ -16,6 +16,7 @@ import { projectsService } from '../services/api';
 import { useWebsite } from '../context/WebsiteContext';
 import ContactCTA from '../components/home/ContactCTA';
 import { ImageSkeleton, TextSkeleton, Shimmer } from '../components/common/Shimmer';
+import { formatINR } from '../utils/currency';
 import './ProjectDetailsPage.css';
 
 const ProjectDetailsPage = () => {
@@ -139,7 +140,7 @@ const ProjectDetailsPage = () => {
             <span>{project.category}</span>
           </div>
 
-          <h1 className="font-heading font-black text-3xl sm:text-5xl text-white tracking-tight max-w-4xl mx-auto leading-tight">
+          <h1 className="font-heading font-black text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight max-w-4xl mx-auto leading-tight word-wrap break-word">
             {project.title}
           </h1>
 
@@ -258,7 +259,7 @@ const ProjectDetailsPage = () => {
                   <div>
                     <span className="text-gray-400 font-medium block">Starting Package</span>
                     <span className="font-black text-[#fe8a04] text-lg mt-0.5 block">
-                      {project.price || project.budget || '$65'}
+                      {formatINR(project.price || project.budget || 5500)}
                     </span>
                   </div>
                 </div>

@@ -160,7 +160,7 @@ const BlogPage = () => {
                       </div>
                     </div>
 
-                    <div className="p-6">
+                    <div className="p-4 sm:p-6">
                       <div className="flex items-center gap-3 text-[11px] text-gray-400 font-medium mb-3">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3.5 h-3.5 text-[#fe8a04]" />
@@ -177,7 +177,7 @@ const BlogPage = () => {
                         </span>
                       </div>
 
-                      <h3 className="font-heading font-bold text-xl text-[#021343] mb-3 leading-snug line-clamp-2">
+                      <h3 className="font-heading font-bold text-lg sm:text-xl text-[#021343] mb-2 sm:mb-3 leading-snug line-clamp-2">
                         <Link
                           to={`/blog-page/${post.slug || post._id}`}
                           className="hover:text-[#fe8a04] transition-colors"
@@ -186,13 +186,13 @@ const BlogPage = () => {
                         </Link>
                       </h3>
 
-                      <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                      <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3">
                         {post.shortDescription || post.summary}
                       </p>
                     </div>
                   </div>
 
-                  <div className="p-6 pt-0 border-t border-gray-100 flex items-center justify-between">
+                  <div className="p-4 sm:p-6 pt-0 border-t border-gray-100 flex items-center justify-between">
                     <span className="text-xs font-semibold text-gray-500">
                       Webtrek IT
                     </span>

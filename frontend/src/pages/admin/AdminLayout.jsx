@@ -19,10 +19,12 @@ import {
   CheckSquare,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useWebsite } from '../../context/WebsiteContext';
 import './AdminLayout.css';
 
 const AdminLayout = () => {
   const { admin, logout, isAuthenticated, loading } = useAuth();
+  const { websiteName } = useWebsite();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -72,11 +74,11 @@ const AdminLayout = () => {
           <div className="h-16 flex items-center justify-between px-6 border-b border-white/10">
             <Link to="/" target="_blank" className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-[#fe8a04] flex items-center justify-center font-bold text-white text-sm">
-                W
+                {(websiteName || 'W').charAt(0).toUpperCase()}
               </div>
               <div className="flex flex-col">
-                <span className="font-heading font-extrabold text-sm tracking-tight">
-                  WEBTREK ADMIN
+                <span className="font-heading font-extrabold text-xs tracking-tight uppercase truncate max-w-[130px]">
+                  {websiteName || 'WEBTREK'} ADMIN
                 </span>
                 <span className="text-[9px] uppercase tracking-widest text-[#fe8a04]">
                   Control Panel

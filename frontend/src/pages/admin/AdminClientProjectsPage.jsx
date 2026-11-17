@@ -15,6 +15,7 @@ import {
   CheckSquare,
 } from 'lucide-react';
 import { clientProjectsService } from '../../services/api';
+import { formatINR } from '../../utils/currency';
 import './AdminClientProjectsPage.css';
 
 const deliveryStatuses = ['All', 'Planning', 'In Progress', 'Review', 'Completed', 'On Hold'];
@@ -254,7 +255,7 @@ const AdminClientProjectsPage = () => {
                   >
                     {p.status}
                   </span>
-                  <span className="font-extrabold text-[#fe8a04] text-xs">{p.budget}</span>
+                  <span className="font-extrabold text-[#fe8a04] text-xs">{formatINR(p.budget)}</span>
                 </div>
 
                 <h3 className="font-heading font-bold text-base text-[#021343] mb-1">

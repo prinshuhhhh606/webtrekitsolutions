@@ -5,6 +5,7 @@ const WebsiteContext = createContext();
 
 export const WebsiteProvider = ({ children }) => {
   const [settings, setSettings] = useState({
+    websiteName: 'Webtrek IT Solutions',
     companyName: 'Webtrek IT Solutions',
     tagline: 'Smart Partner To Grow Your Best Business',
     phone: '+91 7496969728',
@@ -60,7 +61,14 @@ export const WebsiteProvider = ({ children }) => {
     try {
       const res = await settingsService.get();
       if (res.data.success && res.data.data) {
-        setSettings(res.data.data);
+        const data = res.data.data;
+        const currentName = data.websiteName || data.companyName || 'Webtrek IT Solutions';
+        data.websiteName = currentName;
+        data.companyName = currentName;
+        setSettings(data);
+        if (typeof document !== 'undefined') {
+          document.title = `${currentName} | Smart Partner To Grow Your Best Business`;
+        }
       }
     } catch (err) {
       // Use fallback defaults gracefully if backend is loading
@@ -71,10 +79,13 @@ export const WebsiteProvider = ({ children }) => {
     fetchSettings();
   }, []);
 
+  const websiteName = settings.websiteName || settings.companyName || 'Webtrek IT Solutions';
+
   return (
     <WebsiteContext.Provider
       value={{
         settings,
+        websiteName,
         refreshSettings: fetchSettings,
         isModalOpen,
         modalOptions,

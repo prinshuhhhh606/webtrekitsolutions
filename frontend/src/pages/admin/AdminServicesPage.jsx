@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit2, Trash2, CheckCircle, AlertCircle, Loader2, X, Layers, Image as ImageIcon } from 'lucide-react';
 import { servicesService } from '../../services/api';
+import ImageUploadField from '../../components/admin/ImageUploadField';
 import './AdminServicesPage.css';
 
 const AdminServicesPage = () => {
@@ -300,16 +301,13 @@ const AdminServicesPage = () => {
                 />
               </div>
 
-              <div>
-                <label className="block font-bold text-gray-700 mb-1">Image URL</label>
-                <input
-                  type="text"
-                  value={formData.image}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  placeholder="https://images.unsplash.com/photo-..."
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#fe8a04]"
-                />
-              </div>
+              {/* Dual Image Upload: Option A (URL) & Option B (Local Device File) */}
+              <ImageUploadField
+                label="Service Illustration / Cover Image"
+                value={formData.image}
+                onChange={(imgUrl) => setFormData({ ...formData, image: imgUrl })}
+                helperText="Upload service cover image or provide a web URL."
+              />
 
               <div>
                 <label className="block font-bold text-gray-700 mb-1">

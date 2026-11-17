@@ -168,21 +168,21 @@ const PortfolioPage = () => {
                       )}
                     </div>
 
-                    <div className="p-6">
-                      <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-1">
+                    <div className="p-4 sm:p-6">
+                      <span className="text-[11px] sm:text-xs text-gray-400 font-semibold uppercase tracking-wider block mb-1">
                         {item.client}
                       </span>
-                      <h3 className="portfolio-card-title font-heading font-bold text-xl text-[#021343] mb-3 leading-snug">
+                      <h3 className="portfolio-card-title font-heading font-bold text-lg sm:text-xl text-[#021343] mb-2 sm:mb-3 leading-snug">
                         {item.title}
                       </h3>
-                      <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                      <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
                         {item.description}
                       </p>
                     </div>
                   </div>
 
                   {/* Action Buttons: View Details, Visit Live Website, Similar Project */}
-                  <div className="p-6 pt-0 border-t border-gray-100 flex flex-wrap items-center gap-2">
+                  <div className="p-4 sm:p-6 pt-0 border-t border-gray-100 flex flex-wrap items-center gap-2">
                     <Link
                       to={`/our-project/${item.slug || item._id || item.id}`}
                       className="portfolio-view-btn flex-1 min-w-[100px] inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold text-[#021343] bg-gray-100 hover:bg-[#021343] hover:text-white transition-all cursor-pointer border border-gray-200"

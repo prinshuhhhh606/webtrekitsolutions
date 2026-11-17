@@ -9,13 +9,14 @@ import ContactCTA from '../components/home/ContactCTA';
 import SectionHeader from '../components/common/SectionHeader';
 import PageBanner from '../components/common/PageBanner';
 import { ProjectCardSkeleton } from '../components/common/Shimmer';
+import { formatINR } from '../utils/currency';
 import './ProjectsPage.css';
 
 const projectsList = [
   {
     id: 1,
     title: 'Graphic Design Monthly Subscription',
-    price: '$65',
+    price: '₹5,500',
     category: 'Digital Marketing',
     image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80',
     description: 'High-impact brand creatives, social media banners, and digital graphics tailored for your monthly marketing strategy.',
@@ -24,7 +25,7 @@ const projectsList = [
   {
     id: 2,
     title: 'Ecommerce Presentation Startup',
-    price: '$65',
+    price: '₹5,500',
     category: 'Consultant Business',
     image: 'https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80',
     description: 'Pitch decks, product roadmaps, and business deck architecture designed for innovative retail startups.',
@@ -33,7 +34,7 @@ const projectsList = [
   {
     id: 3,
     title: 'Company Profile Web Development',
-    price: '$65',
+    price: '₹5,500',
     category: 'Website Development',
     image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=800&q=80',
     description: 'Modern, high-performance corporate presence that establishes authority and drives business inquiries.',
@@ -42,7 +43,7 @@ const projectsList = [
   {
     id: 4,
     title: 'Grow Social Media Marketing Business',
-    price: '$65',
+    price: '₹5,500',
     category: 'Digital Marketing',
     image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80',
     description: 'Community building, organic storytelling, and targeted customer engagement on Instagram, LinkedIn, and Meta.',
@@ -51,7 +52,7 @@ const projectsList = [
   {
     id: 5,
     title: 'Photography Ads For Business Media',
-    price: '$65',
+    price: '₹5,500',
     category: 'Digital Marketing',
     image: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=800&q=80',
     description: 'Visual advertising creatives, product photoshoot concepts, and high-CTR social ad creatives.',
@@ -60,7 +61,7 @@ const projectsList = [
   {
     id: 6,
     title: 'Comeback & Grow Business Services',
-    price: '$65',
+    price: '₹5,500',
     category: 'Consultant Business',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
     description: 'Holistic business turnaround consulting, digital optimization, and revenue recovery roadmaps.',
@@ -200,27 +201,27 @@ const ProjectsPage = () => {
                         {project.category}
                       </div>
                       <div className="absolute bottom-4 right-4 bg-[#fe8a04] text-white text-xs font-bold px-3 py-1 rounded-full shadow z-10">
-                        {project.price || '$65'}
+                        {formatINR(project.price || 5500)}
                       </div>
                     </div>
 
-                    <div className="p-6">
-                      <h3 className="project-card-title font-heading font-bold text-xl text-[#021343] mb-3 leading-snug">
+                    <div className="p-4 sm:p-6">
+                      <h3 className="project-card-title font-heading font-bold text-lg sm:text-xl text-[#021343] mb-2 sm:mb-3 leading-snug">
                         {project.title}
                       </h3>
-                      <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                      <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
                         {project.description}
                       </p>
                     </div>
                   </div>
 
-                  <div className="p-6 pt-0 border-t border-gray-100 space-y-3">
+                  <div className="p-4 sm:p-6 pt-0 border-t border-gray-100 space-y-2.5 sm:space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold uppercase tracking-wider text-gray-500">
                         Starting Package
                       </span>
                       <span className="text-base font-extrabold text-[#021343]">
-                        {project.price || '$65'}
+                        {formatINR(project.price || 5500)}
                       </span>
                     </div>
 

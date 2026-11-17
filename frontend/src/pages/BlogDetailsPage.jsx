@@ -114,7 +114,7 @@ const BlogDetailsPage = () => {
             <span>{blog.category}</span>
           </div>
 
-          <h1 className="font-heading font-black text-3xl sm:text-5xl text-white tracking-tight leading-tight">
+          <h1 className="font-heading font-black text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight word-wrap break-word">
             {blog.title}
           </h1>
 

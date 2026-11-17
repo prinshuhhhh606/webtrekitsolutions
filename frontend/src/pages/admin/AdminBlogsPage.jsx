@@ -13,6 +13,7 @@ import {
   Search,
 } from 'lucide-react';
 import { blogsService, uploadService } from '../../services/api';
+import ImageUploadField from '../../components/admin/ImageUploadField';
 import './AdminBlogsPage.css';
 
 const blogCategories = [
@@ -394,27 +395,14 @@ const AdminBlogsPage = () => {
                 </div>
               </div>
 
-              <div>
-                <label className="block font-bold text-gray-700 mb-1">Featured Image URL / Upload</label>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    value={formData.image}
-                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                    placeholder="https://images.unsplash.com/... or upload"
-                    className="flex-1 px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#fe8a04]"
-                  />
-                  <label className="px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold cursor-pointer whitespace-nowrap">
-                    Upload
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-              </div>
+              {/* Dual Image Upload: Option A (URL) & Option B (Local Device File) */}
+              <ImageUploadField
+                label="Article Featured Cover Image"
+                required
+                value={formData.image}
+                onChange={(imgUrl) => setFormData({ ...formData, image: imgUrl })}
+                helperText="Upload high-res JPG, PNG, WEBP (<5MB) or enter an external image URL."
+              />
 
               <div>
                 <label className="block font-bold text-gray-700 mb-1">Short Description *</label>

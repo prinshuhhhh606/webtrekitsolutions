@@ -7,6 +7,7 @@ import './AdminSettingsPage.css';
 const AdminSettingsPage = () => {
   const { refreshSettings } = useWebsite();
   const [formData, setFormData] = useState({
+    websiteName: 'Webtrek IT Solutions',
     companyName: 'Webtrek IT Solutions',
     tagline: 'Smart Partner For To Grow Your Best Business',
     phone: '+91 9039811558',
@@ -38,11 +39,15 @@ const AdminSettingsPage = () => {
         setLoading(true);
         const res = await settingsService.get();
         if (res.data.success && res.data.data) {
+          const d = res.data.data;
+          const currentName = d.websiteName || d.companyName || 'Webtrek IT Solutions';
           setFormData((prev) => ({
             ...prev,
-            ...res.data.data,
-            socialLinks: { ...prev.socialLinks, ...(res.data.data.socialLinks || {}) },
-            stats: { ...prev.stats, ...(res.data.data.stats || {}) },
+            ...d,
+            websiteName: currentName,
+            companyName: currentName,
+            socialLinks: { ...prev.socialLinks, ...(d.socialLinks || {}) },
+            stats: { ...prev.stats, ...(d.stats || {}) },
           }));
         }
       } catch (err) {
@@ -56,6 +61,15 @@ const AdminSettingsPage = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleWebsiteNameChange = (e) => {
+    const val = e.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      websiteName: val,
+      companyName: val,
+    }));
   };
 
   const handleSocialChange = (e) => {
@@ -73,19 +87,29 @@ const AdminSettingsPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
+    if (!formData.websiteName || !formData.websiteName.trim()) {
+      setMsg({ text: 'Website Name cannot be empty.', type: 'error' });
+      return;
+    }
+
     setSaving(true);
     setMsg({ text: '', type: '' });
 
     try {
-      const res = await settingsService.update(formData);
+      const payload = {
+        ...formData,
+        websiteName: formData.websiteName.trim(),
+        companyName: formData.websiteName.trim(),
+      };
+      const res = await settingsService.update(payload);
       if (res.data.success) {
-        setMsg({ text: 'Website settings saved and updated live!', type: 'success' });
+        setMsg({ text: 'Website Name & Settings saved and updated live!', type: 'success' });
         refreshSettings();
-        setTimeout(() => setMsg({ text: '', type: '' }), 3000);
+        setTimeout(() => setMsg({ text: '', type: '' }), 4000);
       }
     } catch (err) {
-      setMsg({ text: 'Failed to update settings.', type: 'error' });
+      setMsg({ text: err.response?.data?.message || 'Failed to update settings.', type: 'error' });
     } finally {
       setSaving(false);
     }
@@ -144,6 +168,29 @@ const AdminSettingsPage = () => {
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-xs">
+              <div className="sm:col-span-2 bg-gradient-to-r from-orange-50/70 to-blue-50/50 p-4 rounded-xl border border-orange-200/80">
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block font-bold text-gray-900 text-sm">
+                    Website Name <span className="text-red-500">*</span>
+                  </label>
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#fe8a04] text-white">
+                    Live Brand Identity
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  name="websiteName"
+                  required
+                  value={formData.websiteName}
+                  onChange={handleWebsiteNameChange}
+                  placeholder="e.g. Webtrek IT Solutions"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-base font-bold text-[#021343] focus:outline-none focus:border-[#fe8a04] bg-white shadow-xs"
+                />
+                <p className="text-[11px] text-gray-500 mt-1.5">
+                  Updates dynamically across the Navbar, Footer brand, Browser tab title, and Admin panel layout.
+                </p>
+              </div>
+
               <div>
                 <label className="block font-bold text-gray-700 mb-1.5">Company Legal Name</label>
                 <input

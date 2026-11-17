@@ -1,0 +1,14 @@
+.image-upload-field-container {
+  width: 100%;
+}
+
+.image-upload-field-container input[type="url"],
+.image-upload-field-container input[type="text"] {
+  transition: all 0.2s ease-in-out;
+}
+
+.image-upload-field-container input[type="url"]:focus,
+.image-upload-field-container input[type="text"]:focus {
+  border-color: #fe8a04;
+  box-shadow: 0 0 0 3px rgba(254, 138, 4, 0.15);
+}

@@ -5,13 +5,14 @@ import { useWebsite } from '../../context/WebsiteContext';
 import { projectsService } from '../../services/api';
 import SectionHeader from '../common/SectionHeader';
 import { ProjectCardSkeleton } from '../common/Shimmer';
+import { formatINR } from '../../utils/currency';
 import './HomeProjectsSection.css';
 
 const defaultFeatured = [
   {
     id: 1,
     title: 'Company Profile Web Development',
-    price: '$65',
+    price: '₹5,500',
     category: 'Website Development',
     image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=800&q=80',
     description: 'Modern, high-performance corporate presence that establishes authority and drives business inquiries.',
@@ -21,7 +22,7 @@ const defaultFeatured = [
   {
     id: 2,
     title: 'Graphic Design Monthly Subscription',
-    price: '$65',
+    price: '₹5,500',
     category: 'Digital Marketing',
     image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80',
     description: 'High-impact brand creatives, social media banners, and digital graphics tailored for your monthly marketing strategy.',
@@ -31,7 +32,7 @@ const defaultFeatured = [
   {
     id: 3,
     title: 'Ecommerce Presentation Startup',
-    price: '$65',
+    price: '₹5,500',
     category: 'Consultant Business',
     image: 'https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80',
     description: 'Pitch decks, product roadmaps, and business deck architecture designed for innovative retail startups.',
@@ -41,7 +42,7 @@ const defaultFeatured = [
   {
     id: 4,
     title: 'Grow Social Media Marketing Business',
-    price: '$65',
+    price: '₹5,500',
     category: 'Digital Marketing',
     image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80',
     description: 'Community building, organic storytelling, and targeted customer engagement on Instagram, LinkedIn, and Meta.',
@@ -51,7 +52,7 @@ const defaultFeatured = [
   {
     id: 5,
     title: 'Photography Ads For Business Media',
-    price: '$65',
+    price: '₹5,500',
     category: 'Digital Marketing',
     image: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=800&q=80',
     description: 'Visual advertising creatives, product photoshoot concepts, and high-CTR social ad creatives.',
@@ -61,7 +62,7 @@ const defaultFeatured = [
   {
     id: 6,
     title: 'Comeback & Grow Business Services',
-    price: '$65',
+    price: '₹5,500',
     category: 'Consultant Business',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
     description: 'Holistic business turnaround consulting, digital optimization, and revenue recovery roadmaps.',
@@ -98,23 +99,6 @@ const HomeProjectsSection = () => {
       }
     };
     fetchProjects();
-  }, []);
-
-  // Direct Mouse Wheel Horizontal Scroll Listener
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const onWheel = (e) => {
-      if (Math.abs(e.deltaY) > 0) {
-        // Prevent default vertical window scroll and convert directly to horizontal scroll
-        e.preventDefault();
-        el.scrollLeft += e.deltaY * 1.35;
-      }
-    };
-
-    el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
   }, []);
 
   // Update active center card on scroll
@@ -251,23 +235,23 @@ const HomeProjectsSection = () => {
 
                           {/* Price Tag */}
                           <div className="absolute bottom-4 right-4 bg-gradient-to-r from-[#fe8a04] to-[#ff5e13] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10">
-                            {project.price || '$65'}
+                            {formatINR(project.price || 5500)}
                           </div>
                         </div>
 
                         {/* Content */}
-                        <div className="p-6">
-                          <h3 className="project-card-title font-heading font-bold text-xl text-[#021343] mb-3 leading-snug line-clamp-2">
+                        <div className="p-4 sm:p-6">
+                          <h3 className="project-card-title font-heading font-bold text-lg sm:text-xl text-[#021343] mb-2 sm:mb-3 leading-snug line-clamp-2">
                             {project.title}
                           </h3>
-                          <p className="project-card-desc text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                          <p className="project-card-desc text-gray-600 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-2">
                             {project.description || project.shortDescription}
                           </p>
                         </div>
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="p-6 pt-0 border-t border-gray-100 space-y-3 mt-auto">
+                      <div className="p-4 sm:p-6 pt-0 border-t border-gray-100 space-y-2.5 sm:space-y-3 mt-auto">
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-bold uppercase tracking-wider text-gray-500">
                             Starting Package

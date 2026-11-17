@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit2, Trash2, CheckCircle, AlertCircle, Loader2, X, Star } from 'lucide-react';
 import { testimonialsService } from '../../services/api';
+import ImageUploadField from '../../components/admin/ImageUploadField';
 import './AdminTestimonialsPage.css';
 
 const AdminTestimonialsPage = () => {
@@ -274,16 +275,13 @@ const AdminTestimonialsPage = () => {
                 </select>
               </div>
 
-              <div>
-                <label className="block font-bold text-gray-700 mb-1">Avatar Photo URL</label>
-                <input
-                  type="text"
-                  value={formData.avatar}
-                  onChange={(e) => setFormData({ ...formData, avatar: e.target.value })}
-                  placeholder="https://images.unsplash.com/..."
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#fe8a04]"
-                />
-              </div>
+              {/* Dual Image Upload: Option A (URL) & Option B (Local Device File) */}
+              <ImageUploadField
+                label="Client Avatar Photo"
+                value={formData.avatar}
+                onChange={(imgUrl) => setFormData({ ...formData, avatar: imgUrl })}
+                helperText="Upload client portrait from device or enter web URL."
+              />
 
               <div className="pt-4 flex items-center justify-end gap-3">
                 <button

@@ -229,7 +229,7 @@ const EnquiryModal = () => {
           </div>
           <button
             onClick={closeEnquiryModal}
-            className="p-2 rounded-full text-gray-300 hover:text-white hover:bg-white/15 transition-colors cursor-pointer"
+            className="p-2 rounded-full text-gray-300 hover:text-white hover:bg-white/15 transition-colors cursor-pointer shrink-0 ml-3"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -237,7 +237,7 @@ const EnquiryModal = () => {
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 sm:p-8 max-h-[80vh] overflow-y-auto">
+        <div className="modal-body-scrollable p-4 sm:p-6 lg:p-7">
           {success ? (
             /* Success Feedback View */
             <div className="py-8 sm:py-12 text-center space-y-6 animate-fade-in">

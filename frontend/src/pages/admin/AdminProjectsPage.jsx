@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Edit2, Trash2, CheckCircle, AlertCircle, Loader2, X, Briefcase, ExternalLink } from 'lucide-react';
+import { Plus, Edit2, Trash2, CheckCircle, AlertCircle, Loader2, X, Briefcase, ExternalLink, IndianRupee } from 'lucide-react';
 import { projectsService } from '../../services/api';
+import ImageUploadField from '../../components/admin/ImageUploadField';
+import { formatINR } from '../../utils/currency';
 import './AdminProjectsPage.css';
 
 const AdminProjectsPage = () => {
@@ -17,6 +19,7 @@ const AdminProjectsPage = () => {
     description: '',
     client: '',
     category: 'Web Development',
+    price: '₹5,500',
     image: '',
     technologies: '',
     liveUrl: '',
@@ -49,6 +52,7 @@ const AdminProjectsPage = () => {
       description: '',
       client: '',
       category: 'Web Development',
+      price: '₹5,500',
       image: '',
       technologies: '',
       liveUrl: '',
@@ -65,6 +69,7 @@ const AdminProjectsPage = () => {
       description: project.description,
       client: project.client || '',
       category: project.category || 'Web Development',
+      price: project.price || '₹5,500',
       image: project.image || '',
       technologies: Array.isArray(project.technologies) ? project.technologies.join(', ') : '',
       liveUrl: project.liveUrl || '',
@@ -80,6 +85,7 @@ const AdminProjectsPage = () => {
     try {
       const payload = {
         ...formData,
+        price: formData.price ? formatINR(formData.price) : '₹5,500',
         technologies: formData.technologies
           ? formData.technologies.split(',').map((t) => t.trim()).filter(Boolean)
           : [],
@@ -177,6 +183,7 @@ const AdminProjectsPage = () => {
                 <tr>
                   <th className="py-3.5 px-6 font-semibold">Project</th>
                   <th className="py-3.5 px-6 font-semibold">Category</th>
+                  <th className="py-3.5 px-6 font-semibold">Starting Price</th>
                   <th className="py-3.5 px-6 font-semibold">Client</th>
                   <th className="py-3.5 px-6 font-semibold">Technologies</th>
                   <th className="py-3.5 px-6 font-semibold text-right">Actions</th>
@@ -200,6 +207,9 @@ const AdminProjectsPage = () => {
                       <span className="px-2.5 py-1 rounded-full bg-orange-50 text-[#fe8a04] font-semibold text-[11px] border border-orange-200">
                         {proj.category}
                       </span>
+                    </td>
+                    <td className="py-4 px-6 font-bold text-[#021343]">
+                      {formatINR(proj.price || 5500)}
                     </td>
                     <td className="py-4 px-6 text-gray-600">
                       {proj.client || 'Confidential'}
@@ -270,7 +280,7 @@ const AdminProjectsPage = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block font-bold text-gray-700 mb-1">Category *</label>
                   <select
@@ -284,6 +294,17 @@ const AdminProjectsPage = () => {
                     <option value="Digital Marketing">Digital Marketing</option>
                     <option value="Custom Software">Custom Software</option>
                   </select>
+                </div>
+                <div>
+                  <label className="block font-bold text-gray-700 mb-1">Starting Price (INR) *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.price}
+                    onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                    placeholder="₹5,500"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#fe8a04] font-semibold text-[#021343]"
+                  />
                 </div>
                 <div>
                   <label className="block font-bold text-gray-700 mb-1">Client Name</label>
@@ -309,17 +330,14 @@ const AdminProjectsPage = () => {
                 />
               </div>
 
-              <div>
-                <label className="block font-bold text-gray-700 mb-1">Image URL *</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.image}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  placeholder="https://images.unsplash.com/..."
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-[#fe8a04]"
-                />
-              </div>
+              {/* Enhanced Image Upload: Option A (URL) & Option B (Local Device File) */}
+              <ImageUploadField
+                label="Project Cover Image"
+                required
+                value={formData.image}
+                onChange={(imgUrl) => setFormData({ ...formData, image: imgUrl })}
+                helperText="Upload a featured screenshot from your device or provide a public image URL."
+              />
 
               <div className="grid grid-cols-2 gap-4">
                 <div>

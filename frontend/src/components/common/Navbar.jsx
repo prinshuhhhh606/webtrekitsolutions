@@ -7,8 +7,12 @@ import './Navbar.css';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { openEnquiryModal } = useWebsite();
+  const { websiteName, openEnquiryModal } = useWebsite();
   const location = useLocation();
+
+  const brandParts = (websiteName || 'Webtrek IT Solutions').trim().split(' ');
+  const brandFirst = brandParts[0] || 'WEBTREK';
+  const brandRest = brandParts.slice(1).join(' ') || 'IT Solutions';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,15 +42,17 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
             <div className="navbar-logo-badge group-hover:scale-105">
-              <span>W</span>
+              <span>{brandFirst.charAt(0).toUpperCase()}</span>
             </div>
             <div className="flex flex-col">
               <span className="font-heading font-extrabold text-lg sm:text-2xl text-white tracking-tight leading-none">
-                WEBTREK<span className="text-[#fe8a04]">.</span>
+                {brandFirst.toUpperCase()}<span className="text-[#fe8a04]">.</span>
               </span>
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-300 font-medium">
-                IT Solutions
-              </span>
+              {brandRest && (
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-300 font-medium">
+                  {brandRest}
+                </span>
+              )}
             </div>
           </Link>
 

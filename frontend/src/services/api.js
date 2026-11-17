@@ -4,7 +4,7 @@ const API_BASE_URL =
   import.meta.env.VITE_API_URL ||
   (import.meta.env.PROD
     ? 'https://webtrekitsolutions-ezoq.onrender.com/api'
-    : 'http://localhost:5000/api');
+    : 'http://localhost:5001/api');
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -42,6 +42,17 @@ api.interceptors.response.use(
   }
 );
 
+// Helper to handle both standard JSON bodies and multipart FormData
+const postData = (url, data) => {
+  const isForm = typeof FormData !== 'undefined' && data instanceof FormData;
+  return api.post(url, data, isForm ? { headers: { 'Content-Type': 'multipart/form-data' } } : {});
+};
+
+const putData = (url, data) => {
+  const isForm = typeof FormData !== 'undefined' && data instanceof FormData;
+  return api.put(url, data, isForm ? { headers: { 'Content-Type': 'multipart/form-data' } } : {});
+};
+
 // Endpoints
 export const authService = {
   login: (credentials) => api.post('/auth/login', credentials),
@@ -54,8 +65,8 @@ export const servicesService = {
   getAll: (params) => api.get('/services', { params }),
   getBySlug: (slug) => api.get(`/services/slug/${slug}`),
   getById: (id) => api.get(`/services/${id}`),
-  create: (formData) => api.post('/services', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
-  update: (id, formData) => api.put(`/services/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  create: (data) => postData('/services', data),
+  update: (id, data) => putData(`/services/${id}`, data),
   delete: (id) => api.delete(`/services/${id}`),
 };
 
@@ -63,24 +74,25 @@ export const projectsService = {
   getAll: (params) => api.get('/projects', { params }),
   getBySlug: (slug) => api.get(`/projects/slug/${slug}`),
   getById: (id) => api.get(`/projects/${id}`),
-  create: (formData) => api.post('/projects', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
-  update: (id, formData) => api.put(`/projects/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  create: (data) => postData('/projects', data),
+  update: (id, data) => putData(`/projects/${id}`, data),
   delete: (id) => api.delete(`/projects/${id}`),
 };
 
 export const teamService = {
   getAll: (params) => api.get('/team', { params }),
   getById: (id) => api.get(`/team/${id}`),
-  create: (formData) => api.post('/team', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
-  update: (id, formData) => api.put(`/team/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  create: (data) => postData('/team', data),
+  update: (id, data) => putData(`/team/${id}`, data),
+  toggleStatus: (id, isActive) => api.patch(`/team/${id}/status`, { isActive }),
   delete: (id) => api.delete(`/team/${id}`),
 };
 
 export const testimonialsService = {
   getAll: (params) => api.get('/testimonials', { params }),
   getById: (id) => api.get(`/testimonials/${id}`),
-  create: (formData) => api.post('/testimonials', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
-  update: (id, formData) => api.put(`/testimonials/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  create: (data) => postData('/testimonials', data),
+  update: (id, data) => putData(`/testimonials/${id}`, data),
   delete: (id) => api.delete(`/testimonials/${id}`),
 };
 
