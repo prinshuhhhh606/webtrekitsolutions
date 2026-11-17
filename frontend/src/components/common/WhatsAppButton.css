@@ -1,19 +1,27 @@
 /* WhatsAppButton Component Styles */
 .whatsapp-floating-btn {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: 1rem;
+  right: 1rem;
   z-index: 40;
   display: flex;
   align-items: center;
   gap: 0.625rem;
   background-color: #25D366;
   color: #ffffff;
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 0.75rem;
   border-radius: 9999px;
   box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.4);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
+}
+
+@media (min-width: 640px) {
+  .whatsapp-floating-btn {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    padding: 0.75rem 1.25rem;
+  }
 }
 
 .whatsapp-floating-btn:hover {

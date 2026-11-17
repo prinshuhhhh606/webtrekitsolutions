@@ -6,11 +6,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 0.75rem;
   background-color: rgba(1, 4, 16, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   animation: fadeIn 0.25s ease-out;
+  overflow-y: auto;
+}
+
+@media (min-width: 640px) {
+  .modal-overlay {
+    padding: 1.5rem;
+  }
 }
 
 .modal-dialog {
@@ -18,20 +25,32 @@
   width: 100%;
   max-width: 32rem;
   background-color: #ffffff;
-  border-radius: 1.5rem;
+  border-radius: 1.25rem;
   box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.7), 0 0 45px rgba(254, 138, 4, 0.12);
   border: 1px solid rgba(254, 138, 4, 0.25);
   overflow: hidden;
 }
 
+@media (min-width: 640px) {
+  .modal-dialog {
+    border-radius: 1.5rem;
+  }
+}
+
 .modal-header {
   background: radial-gradient(ellipse at 50% 0%, #0d1e4e 0%, #03081a 100%);
-  padding: 1.35rem 1.75rem;
+  padding: 1.15rem 1.25rem;
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(254, 138, 4, 0.18);
+}
+
+@media (min-width: 640px) {
+  .modal-header {
+    padding: 1.35rem 1.75rem;
+  }
 }
 
 .modal-submit-btn {

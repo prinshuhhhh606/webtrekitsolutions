@@ -5,11 +5,19 @@
 .footer-container {
   background: radial-gradient(ellipse at 50% -10%, #0e1e47 0%, #030818 55%, #01040d 100%);
   color: #94a3b8;
-  padding-top: 5rem;
-  padding-bottom: 2.5rem;
+  padding-top: 3.5rem;
+  padding-bottom: 2rem;
   border-top: 1px solid rgba(254, 138, 4, 0.15);
   position: relative;
   overflow: hidden;
+  max-width: 100vw;
+}
+
+@media (min-width: 640px) {
+  .footer-container {
+    padding-top: 5rem;
+    padding-bottom: 2.5rem;
+  }
 }
 
 /* Ambient Radiant Neon Glow Orbs */

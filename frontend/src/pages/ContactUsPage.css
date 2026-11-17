@@ -27,10 +27,17 @@
 
 .contact-form-card {
   background-color: #f8fafc;
-  padding: 2.5rem;
-  border-radius: 1.5rem;
+  padding: 1.35rem 1rem;
+  border-radius: 1.25rem;
   border: 1px solid #e2e8f0;
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 640px) {
+  .contact-form-card {
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+  }
 }
 
 @keyframes fadeIn {

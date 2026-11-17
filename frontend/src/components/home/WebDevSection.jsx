@@ -69,20 +69,20 @@ const WebDevSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#021343]/90 via-[#021343]/30 to-transparent pointer-events-none" />
 
                 {/* Floating All-in-One Package Card with Staggered Entrance & Ambient Float */}
-                <div className="webdev-floating-card absolute bottom-6 left-6 right-6 text-white p-5 rounded-2xl">
-                  <div className="flex items-center justify-between gap-3">
+                <div className="webdev-floating-card absolute bottom-3 sm:bottom-6 left-3 sm:left-6 right-3 sm:right-6 text-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl">
+                  <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 sm:gap-3">
                     <div>
                       <div className="flex items-center gap-1.5 mb-0.5">
                         <Sparkles className="w-3.5 h-3.5 text-[#fe8a04]" />
-                        <span className="text-xs uppercase text-[#fe8a04] font-extrabold tracking-wider">
+                        <span className="text-[10px] sm:text-xs uppercase text-[#fe8a04] font-extrabold tracking-wider">
                           All In One Package
                         </span>
                       </div>
-                      <h4 className="font-heading font-extrabold text-lg sm:text-xl text-white tracking-tight">
+                      <h4 className="font-heading font-extrabold text-base sm:text-xl text-white tracking-tight">
                         Smart Digital Solutions
                       </h4>
                     </div>
-                    <span className="px-3.5 py-1.5 bg-emerald-500/20 text-emerald-300 text-xs font-bold rounded-full border border-emerald-500/35 shrink-0 shadow-sm flex items-center gap-1.5">
+                    <span className="px-3 py-1 sm:px-3.5 sm:py-1.5 bg-emerald-500/20 text-emerald-300 text-[11px] sm:text-xs font-bold rounded-full border border-emerald-500/35 shrink-0 shadow-sm flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                       <span>24 Hours Online</span>
                     </span>

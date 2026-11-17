@@ -2,11 +2,18 @@
 .faqpage-hero-banner {
   background-color: #021343;
   color: #ffffff;
-  padding-top: 5.5rem;
-  padding-bottom: 5.5rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
   position: relative;
   text-align: center;
   overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .faqpage-hero-banner {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+  }
 }
 
 .faqpage-hero-banner::before {

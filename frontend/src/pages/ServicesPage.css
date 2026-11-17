@@ -11,8 +11,8 @@
 
 /* Service Feature Cards - Premium Floating & Elevation Animations */
 .service-feature-card {
-  border-radius: 1.75rem;
-  padding: 2.75rem;
+  border-radius: 1.25rem;
+  padding: 1.5rem 1.25rem;
   border: 1px solid rgba(226, 232, 240, 0.9);
   box-shadow: 0 10px 30px -5px rgba(4, 14, 45, 0.06);
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
@@ -21,6 +21,19 @@
   position: relative;
   will-change: transform, box-shadow;
   animation: serviceFeatureFloat 6s ease-in-out infinite;
+}
+
+@media (min-width: 640px) {
+  .service-feature-card {
+    border-radius: 1.75rem;
+    padding: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-feature-card {
+    padding: 2.75rem;
+  }
 }
 
 /* Staggered Organic Floating Intervals */

@@ -1,6 +1,12 @@
 /* SectionHeader Component Styles */
 .section-header-wrapper {
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-header-wrapper {
+    margin-bottom: 3.5rem;
+  }
 }
 
 .section-header-centered {
@@ -14,14 +20,23 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.4rem 1.15rem;
+  padding: 0.35rem 1rem;
   border-radius: 9999px;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-bottom: 1.15rem;
+  margin-bottom: 0.85rem;
   border-width: 1px;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .section-header-badge {
+    padding: 0.4rem 1.15rem;
+    font-size: 0.78rem;
+    margin-bottom: 1.15rem;
+  }
 }
 
 .section-header-badge.light {
@@ -39,21 +54,29 @@
 }
 
 .section-header-pulse {
-  width: 0.55rem;
-  height: 0.55rem;
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 9999px;
   background-color: #fe8a04;
   box-shadow: 0 0 10px #fe8a04;
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  flex-shrink: 0;
 }
 
 .section-header-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 900;
-  font-size: 2.35rem;
+  font-size: clamp(1.65rem, 4.5vw, 2.85rem);
   line-height: 1.2;
   letter-spacing: -0.03em;
-  margin-bottom: 1.15rem;
+  margin-bottom: 0.85rem;
+  word-wrap: break-word;
+}
+
+@media (min-width: 640px) {
+  .section-header-title {
+    margin-bottom: 1.15rem;
+  }
 }
 
 .section-header-title.light {
@@ -65,8 +88,8 @@
 }
 
 .section-header-subtitle {
-  font-size: 1.08rem;
-  line-height: 1.7;
+  font-size: clamp(0.88rem, 1.8vw, 1.08rem);
+  line-height: 1.65;
 }
 
 .section-header-subtitle.light {
@@ -75,10 +98,4 @@
 
 .section-header-subtitle.dark {
   color: #cbd5e1;
-}
-
-@media (min-width: 640px) {
-  .section-header-title {
-    font-size: 2.85rem;
-  }
 }

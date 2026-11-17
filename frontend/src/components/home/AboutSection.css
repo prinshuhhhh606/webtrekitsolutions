@@ -50,16 +50,11 @@
 .webtrek-solution-title {
   font-family: 'Poppins', sans-serif;
   color: #021343;
-  font-size: 2.35rem;
+  font-size: clamp(1.65rem, 4.5vw, 2.75rem);
   font-weight: 800;
   line-height: 1.25;
   letter-spacing: -0.02em;
-}
-
-@media (min-width: 1024px) {
-  .webtrek-solution-title {
-    font-size: 2.75rem;
-  }
+  word-wrap: break-word;
 }
 
 .webtrek-solution-desc {
@@ -88,7 +83,7 @@
 
 /* Base Infobox Styling with Directed Scroll Entrance */
 .webtrek-infobox {
-  padding: 50px 36px;
+  padding: 32px 20px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -102,6 +97,18 @@
               border-color 0.35s ease,
               box-shadow 0.35s ease;
   will-change: transform, opacity;
+}
+
+@media (min-width: 640px) {
+  .webtrek-infobox {
+    padding: 42px 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .webtrek-infobox {
+    padding: 50px 36px;
+  }
 }
 
 /* 1. Smart & Innovative Solutions: Left se aye */

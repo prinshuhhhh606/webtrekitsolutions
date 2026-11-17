@@ -8,14 +8,21 @@
 
 .testimonial-card-box {
   background-color: #ffffff;
-  border-radius: 1.5rem;
-  padding: 2rem;
+  border-radius: 1.25rem;
+  padding: 1.35rem 1.15rem;
   border: 1px solid rgba(226, 232, 240, 0.9);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .testimonial-card-box {
+    border-radius: 1.5rem;
+    padding: 2rem;
+  }
 }
 
 .testimonial-card-box:hover {

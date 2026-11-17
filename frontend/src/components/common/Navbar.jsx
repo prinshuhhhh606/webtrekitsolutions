@@ -36,15 +36,15 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group shrink-0">
+          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
             <div className="navbar-logo-badge group-hover:scale-105">
               <span>W</span>
             </div>
             <div className="flex flex-col">
-              <span className="font-heading font-extrabold text-xl sm:text-2xl text-white tracking-tight leading-none">
+              <span className="font-heading font-extrabold text-lg sm:text-2xl text-white tracking-tight leading-none">
                 WEBTREK<span className="text-[#fe8a04]">.</span>
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-gray-300 font-medium">
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-300 font-medium">
                 IT Solutions
               </span>
             </div>
@@ -90,17 +90,19 @@ const Navbar = () => {
                   sourcePage: 'Navbar Mobile Get Started',
                 })
               }
-              className="sm:inline-flex hidden items-center gap-1.5 bg-[#fe8a04] text-white px-3.5 py-1.5 rounded-full text-xs font-semibold"
+              className="sm:inline-flex hidden items-center gap-1.5 bg-[#fe8a04] text-white px-3.5 py-1.5 rounded-full text-xs font-semibold cursor-pointer shadow-sm hover:bg-[#ff9500] transition-colors"
             >
               <PhoneCall className="w-3.5 h-3.5" />
               <span>Get Started</span>
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-gray-200 hover:text-white hover:bg-white/10 focus:outline-none"
+              className="p-2.5 rounded-xl text-gray-200 hover:text-white hover:bg-white/10 focus:outline-none transition-colors cursor-pointer"
               aria-label="Toggle Navigation"
+              aria-expanded={isOpen}
+              aria-controls="mobile-nav-drawer"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? <X className="w-6 h-6 text-[#fe8a04]" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -108,21 +110,23 @@ const Navbar = () => {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="lg:hidden bg-[#030919] border-b border-white/10 px-4 pt-3 pb-6 space-y-3 shadow-2xl">
-          <div className="flex flex-col space-y-2">
+        <div id="mobile-nav-drawer" className="lg:hidden mobile-nav-drawer bg-[#030919] border-b border-white/10 px-4 pt-3 pb-6 space-y-3 shadow-2xl">
+          <div className="flex flex-col space-y-1.5">
             {navLinks.map((link) => (
               <NavLink
                 key={link.name}
                 to={link.path}
+                onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
-                  `px-3 py-2.5 rounded-lg text-base font-medium transition-colors ${
+                  `px-3.5 py-2.5 rounded-xl text-base font-medium transition-colors flex items-center justify-between ${
                     isActive
-                      ? 'bg-white/10 text-[#fe8a04] font-semibold'
+                      ? 'bg-[#fe8a04]/15 text-[#fe8a04] font-bold border border-[#fe8a04]/30'
                       : 'text-gray-200 hover:bg-white/5 hover:text-[#fe8a04]'
                   }`
                 }
               >
-                {link.name}
+                <span>{link.name}</span>
+                <ArrowRight className="w-4 h-4 opacity-40" />
               </NavLink>
             ))}
           </div>
@@ -143,7 +147,7 @@ const Navbar = () => {
               <ArrowRight className="w-4 h-4" />
             </button>
             <div className="text-center text-xs text-gray-400">
-              Need assistance? Call <a href="tel:+919039811558" className="text-[#fe8a04] underline">+91 9039811558</a>
+              Need assistance? Call <a href="tel:+919039811558" className="text-[#fe8a04] underline font-bold">+91 9039811558</a>
             </div>
           </div>
         </div>

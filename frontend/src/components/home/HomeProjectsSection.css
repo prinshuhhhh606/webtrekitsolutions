@@ -16,8 +16,15 @@
 
 @media (max-width: 640px) {
   :root {
-    --coverflow-card-width: 84vw;
+    --coverflow-card-width: 85vw;
     --coverflow-card-gap: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --coverflow-card-width: 88vw;
+    --coverflow-card-gap: 12px;
   }
 }
 
@@ -71,6 +78,13 @@
   user-select: none;
 }
 
+@media (max-width: 640px) {
+  .horizontal-projects-scroll-wrapper,
+  .coverflow-carousel-container {
+    padding: 1rem 0.25rem 2rem 0.25rem;
+  }
+}
+
 .horizontal-projects-scroll-wrapper::-webkit-scrollbar,
 .coverflow-carousel-container::-webkit-scrollbar {
   display: none;
@@ -91,6 +105,14 @@
   gap: 1.75rem;
   width: max-content;
   padding: 0 1rem;
+}
+
+@media (max-width: 640px) {
+  .horizontal-projects-track,
+  .coverflow-track {
+    gap: 1.15rem;
+    padding: 0 0.5rem;
+  }
 }
 
 /* 3. Slide Item Base (Coverflow Scaling) */

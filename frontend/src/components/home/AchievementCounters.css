@@ -13,13 +13,20 @@
   position: relative;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2.25rem 2rem;
-  border-radius: 1.5rem;
+  padding: 1.5rem 1.25rem;
+  border-radius: 1.25rem;
   text-align: center;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 640px) {
+  .achievement-card {
+    padding: 2.25rem 2rem;
+    border-radius: 1.5rem;
+  }
 }
 
 .achievement-card:hover {
@@ -57,7 +64,7 @@
 .achievement-value {
   font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
   font-weight: 900;
-  font-size: 2.75rem;
+  font-size: clamp(2rem, 5vw, 2.75rem);
   background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

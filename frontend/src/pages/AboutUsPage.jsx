@@ -209,7 +209,7 @@ const AboutUsPage = () => {
                   <img
                     src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80"
                     alt="Webtrek Agency Modern World"
-                    className="w-full h-[400px] object-cover about-agency-img"
+                    className="w-full h-[280px] sm:h-[400px] object-cover about-agency-img"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#021343]/50 via-transparent to-transparent pointer-events-none" />
                 </div>

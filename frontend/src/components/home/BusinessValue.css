@@ -30,8 +30,8 @@
   position: relative;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.5rem;
-  padding: 2.25rem 2rem;
+  border-radius: 1.25rem;
+  padding: 1.65rem 1.25rem;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
@@ -45,6 +45,13 @@
               border-color 0.35s ease,
               box-shadow 0.35s ease;
   will-change: transform, opacity;
+}
+
+@media (min-width: 640px) {
+  .business-value-card {
+    border-radius: 1.5rem;
+    padding: 2.25rem 2rem;
+  }
 }
 
 /* Visible State when scrolled into view */

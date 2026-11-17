@@ -26,21 +26,38 @@
   padding-bottom: 1.15rem;
 }
 
+@media (max-width: 640px) {
+  .navbar-header:not(.scrolled) {
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+  }
+}
+
 /* Glowing Logo Icon Badge */
 .navbar-logo-badge {
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 0.875rem;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 0.75rem;
   background: linear-gradient(135deg, #ff9500 0%, #ff5e13 55%, #e03b00 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
   font-weight: 900;
-  font-size: 1.3rem;
-  box-shadow: 0 0 25px rgba(254, 138, 4, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  font-size: 1.15rem;
+  box-shadow: 0 0 20px rgba(254, 138, 4, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.25);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .navbar-logo-badge {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.875rem;
+    font-size: 1.3rem;
+  }
 }
 
 .navbar-logo-badge:hover {
@@ -111,4 +128,23 @@
 
 .navbar-cta-btn:active {
   transform: translateY(0) scale(0.98);
+}
+
+/* Mobile Drawer Slide & Fade Animation */
+.mobile-nav-drawer {
+  animation: mobileDrawerSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-height: calc(100vh - 72px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@keyframes mobileDrawerSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
