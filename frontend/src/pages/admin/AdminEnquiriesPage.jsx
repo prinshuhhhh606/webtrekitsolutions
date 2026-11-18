@@ -74,9 +74,11 @@ const AdminEnquiriesPage = () => {
   const [editPriority, setEditPriority] = useState('Medium');
   const [editFollowUpDate, setEditFollowUpDate] = useState('');
 
-  const fetchEnquiries = async () => {
+  const fetchEnquiries = async (isInitial = false) => {
     try {
-      setLoading(true);
+      if (isInitial || enquiries.length === 0) {
+        setLoading(true);
+      }
       const params = {};
       if (filterStatus !== 'All') params.status = filterStatus;
       if (filterService !== 'All') params.service = filterService;
@@ -113,14 +115,84 @@ const AdminEnquiriesPage = () => {
     }
   };
 
+  // Immediate Initial Fetch & Real-Time Auto Refresh Sync
   useEffect(() => {
     fetchStats();
+    fetchEnquiries(true);
+
+    // Instant real-time listener for cross-tab and in-app enquiry submissions
+    const handleNewEnquiry = (enquiry) => {
+      if (!enquiry || !enquiry._id) return;
+      setEnquiries((prev) => {
+        // Prevent duplicate if already present
+        if (prev.some((e) => e._id === enquiry._id)) return prev;
+        return [enquiry, ...prev];
+      });
+      setStats((prev) => ({
+        ...prev,
+        total: prev.total + 1,
+        new: prev.new + 1,
+      }));
+      setMsg({
+        text: `⚡ New Enquiry Received: ${enquiry.fullName || enquiry.name} (${enquiry.service})!`,
+        type: 'success',
+      });
+      setTimeout(() => setMsg({ text: '', type: '' }), 5000);
+      fetchStats();
+    };
+
+    // 1. BroadcastChannel (cross-tab real-time)
+    let bc = null;
+    try {
+      bc = new BroadcastChannel('webtrek_enquiries_channel');
+      bc.onmessage = (event) => {
+        if (event.data?.type === 'NEW_ENQUIRY') {
+          handleNewEnquiry(event.data.data);
+        }
+      };
+    } catch (_) {}
+
+    // 2. Custom Window Event (same-tab)
+    const onCustomEvent = (e) => handleNewEnquiry(e.detail);
+    window.addEventListener('webtrek:new_enquiry', onCustomEvent);
+
+    // 3. Storage Event (legacy cross-tab fallback)
+    const onStorage = (e) => {
+      if (e.key === 'webtrek_latest_enquiry' && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          if (parsed?.enquiry) handleNewEnquiry(parsed.enquiry);
+        } catch (_) {}
+      }
+    };
+    window.addEventListener('storage', onStorage);
+
+    // 4. Background polling every 8 seconds & on window focus
+    const pollInterval = setInterval(() => {
+      fetchEnquiries(false);
+      fetchStats();
+    }, 8000);
+
+    const onFocus = () => {
+      fetchEnquiries(false);
+      fetchStats();
+    };
+    window.addEventListener('focus', onFocus);
+
+    return () => {
+      if (bc) bc.close();
+      window.removeEventListener('webtrek:new_enquiry', onCustomEvent);
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('focus', onFocus);
+      clearInterval(pollInterval);
+    };
   }, []);
 
+  // Filter & Search Debounce
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      fetchEnquiries();
-    }, 300);
+      fetchEnquiries(false);
+    }, searchQuery ? 250 : 0);
     return () => clearTimeout(delayDebounceFn);
   }, [filterStatus, filterService, filterType, searchQuery]);
 

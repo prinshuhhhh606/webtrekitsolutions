@@ -105,7 +105,27 @@ export const faqsService = {
 };
 
 export const enquiriesService = {
-  create: (data) => api.post('/enquiries', data),
+  create: async (data) => {
+    const res = await api.post('/enquiries', data);
+    if (res?.data?.success && res.data.data) {
+      if (typeof window !== 'undefined') {
+        const newEnq = res.data.data;
+        try {
+          const bc = new BroadcastChannel('webtrek_enquiries_channel');
+          bc.postMessage({ type: 'NEW_ENQUIRY', data: newEnq });
+          bc.close();
+        } catch (_) {}
+        try {
+          localStorage.setItem('webtrek_latest_enquiry', JSON.stringify({
+            timestamp: Date.now(),
+            enquiry: newEnq,
+          }));
+        } catch (_) {}
+        window.dispatchEvent(new CustomEvent('webtrek:new_enquiry', { detail: newEnq }));
+      }
+    }
+    return res;
+  },
   getAll: (params) => api.get('/enquiries', { params }),
   getStats: () => api.get('/enquiries/stats'),
   getById: (id) => api.get(`/enquiries/${id}`),

@@ -63,6 +63,62 @@ export const ImageSkeleton = ({
 };
 
 /**
+ * Exact-dimension Coverflow Carousel Project Shimmer Skeleton
+ * Perfectly matches .coverflow-slide and .project-item-card dimensions (width, height, padding, borders)
+ * Eliminates all layout shift during initial load
+ */
+export const HomeProjectCarouselSkeleton = ({ count = 4 }) => {
+  return (
+    <>
+      {Array.from({ length: count }).map((_, idx) => {
+        const isCenter = idx === 1; // Highlight the 2nd slide as center during initial shimmer
+        return (
+          <div
+            key={idx}
+            className={`coverflow-slide ${isCenter ? 'is-active' : ''}`}
+            aria-hidden="true"
+          >
+            <div className="project-item-card flex flex-col justify-between h-full bg-white rounded-3xl overflow-hidden border border-gray-200">
+              <div>
+                {/* 1. Exact Image Container (h-60 = 240px) */}
+                <div className="project-img-wrapper relative h-60 w-full overflow-hidden bg-gray-100">
+                  <Shimmer height="100%" rounded="rounded-none" className="w-full" />
+
+                  {/* Category Badge Placeholder */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <Shimmer height="22px" width="110px" rounded="rounded-full" />
+                  </div>
+
+                  {/* Price Tag Placeholder */}
+                  <div className="absolute bottom-4 right-4 z-10">
+                    <Shimmer height="24px" width="70px" rounded="rounded-full" />
+                  </div>
+                </div>
+
+                {/* 2. Exact Content Container (Title + Description) */}
+                <div className="p-4 sm:p-6 space-y-3">
+                  <Shimmer height="22px" width="85%" rounded="rounded-lg" />
+                  <div className="space-y-2 pt-1">
+                    <Shimmer height="14px" width="100%" rounded="rounded" />
+                    <Shimmer height="14px" width="75%" rounded="rounded" />
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Exact Action Buttons Container */}
+              <div className="p-4 sm:p-6 pt-0 border-t border-gray-100 flex items-center justify-between gap-2 sm:gap-3 mt-4">
+                <Shimmer height="38px" className="flex-1" rounded="rounded-xl" />
+                <Shimmer height="38px" className="flex-1" rounded="rounded-xl" />
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+/**
  * Project / Portfolio Card Skeleton
  */
 export const ProjectCardSkeleton = ({ count = 3, isGrid = true }) => {

@@ -4,7 +4,7 @@ import { ArrowRight, Eye, ExternalLink, Sparkles } from 'lucide-react';
 import { useWebsite } from '../../context/WebsiteContext';
 import { projectsService } from '../../services/api';
 import SectionHeader from '../common/SectionHeader';
-import { ProjectCardSkeleton } from '../common/Shimmer';
+import { HomeProjectCarouselSkeleton } from '../common/Shimmer';
 import { formatINR } from '../../utils/currency';
 import './HomeProjectsSection.css';
 
@@ -71,9 +71,26 @@ const defaultFeatured = [
   },
 ];
 
+const getInitialProjects = () => {
+  try {
+    const cached = sessionStorage.getItem('webtrek_cached_projects');
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (_) {}
+  return defaultFeatured;
+};
+
 const HomeProjectsSection = () => {
-  const [projects, setProjects] = useState(defaultFeatured);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState(getInitialProjects);
+  const [loading, setLoading] = useState(() => {
+    try {
+      return !sessionStorage.getItem('webtrek_cached_projects');
+    } catch (_) {
+      return false;
+    }
+  });
   const [activeIndex, setActiveIndex] = useState(0);
   const { openEnquiryModal } = useWebsite();
 
@@ -86,19 +103,37 @@ const HomeProjectsSection = () => {
   const isDraggingState = useRef(false);
 
   useEffect(() => {
+    let isMounted = true;
+
+    // Safety fallback timer so projects are guaranteed to display ultra-fast (<= 700ms)
+    const timer = setTimeout(() => {
+      if (isMounted) setLoading(false);
+    }, 700);
+
     const fetchProjects = async () => {
       try {
         const res = await projectsService.getAll();
         if (res.data.success && res.data.data && res.data.data.length > 0) {
-          setProjects(res.data.data);
+          if (isMounted) {
+            setProjects(res.data.data);
+            try {
+              sessionStorage.setItem('webtrek_cached_projects', JSON.stringify(res.data.data));
+            } catch (_) {}
+          }
         }
       } catch (err) {
         // Fallback to defaultFeatured
       } finally {
-        setLoading(false);
+        clearTimeout(timer);
+        if (isMounted) setLoading(false);
       }
     };
     fetchProjects();
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, []);
 
   // Update active center card on scroll
@@ -196,7 +231,7 @@ const HomeProjectsSection = () => {
         >
           {loading ? (
             <div className="horizontal-projects-track">
-              <ProjectCardSkeleton count={4} />
+              <HomeProjectCarouselSkeleton count={4} />
             </div>
           ) : (
             <div className="horizontal-projects-track content-fade-in">

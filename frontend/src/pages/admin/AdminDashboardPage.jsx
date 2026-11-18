@@ -48,9 +48,11 @@ const AdminDashboardPage = () => {
   const [chartTimeframe, setChartTimeframe] = useState('6M');
 
   useEffect(() => {
-    const fetchDashboard = async () => {
+    const fetchDashboard = async (isInitial = false) => {
       try {
-        setLoading(true);
+        if (isInitial && stats.totalEnquiries === 0) {
+          setLoading(true);
+        }
         const res = await enquiriesService.getStats();
         if (res.data.success) {
           setStats(res.data.stats);
@@ -64,7 +66,59 @@ const AdminDashboardPage = () => {
         setLoading(false);
       }
     };
-    fetchDashboard();
+
+    fetchDashboard(true);
+
+    // Instant real-time listener for incoming enquiries
+    const handleNewEnquiry = (enquiry) => {
+      if (!enquiry || !enquiry._id) return;
+      setStats((prev) => ({
+        ...prev,
+        totalEnquiries: (prev.totalEnquiries || 0) + 1,
+        newEnquiries: (prev.newEnquiries || 0) + 1,
+      }));
+      setRecentEnquiries((prev) => {
+        if (prev.some((e) => e._id === enquiry._id)) return prev;
+        return [enquiry, ...prev.slice(0, 9)];
+      });
+      fetchDashboard(false);
+    };
+
+    let bc = null;
+    try {
+      bc = new BroadcastChannel('webtrek_enquiries_channel');
+      bc.onmessage = (event) => {
+        if (event.data?.type === 'NEW_ENQUIRY') {
+          handleNewEnquiry(event.data.data);
+        }
+      };
+    } catch (_) {}
+
+    const onCustomEvent = (e) => handleNewEnquiry(e.detail);
+    window.addEventListener('webtrek:new_enquiry', onCustomEvent);
+
+    const onStorage = (e) => {
+      if (e.key === 'webtrek_latest_enquiry' && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          if (parsed?.enquiry) handleNewEnquiry(parsed.enquiry);
+        } catch (_) {}
+      }
+    };
+    window.addEventListener('storage', onStorage);
+
+    // Background poll every 10s & on focus
+    const interval = setInterval(() => fetchDashboard(false), 10000);
+    const onFocus = () => fetchDashboard(false);
+    window.addEventListener('focus', onFocus);
+
+    return () => {
+      if (bc) bc.close();
+      window.removeEventListener('webtrek:new_enquiry', onCustomEvent);
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('focus', onFocus);
+      clearInterval(interval);
+    };
   }, []);
 
   const statCards = [

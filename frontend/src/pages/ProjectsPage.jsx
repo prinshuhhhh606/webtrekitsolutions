@@ -71,29 +71,53 @@ const projectsList = [
 
 const categories = ['All', 'Digital Marketing', 'Website Development', 'Consultant Business', 'Web Development', 'Mobile App', 'Custom Software'];
 
+const getInitialProjects = () => {
+  try {
+    const cached = sessionStorage.getItem('webtrek_cached_projects');
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (_) {}
+  return projectsList;
+};
+
 const ProjectsPage = () => {
-  const [projects, setProjects] = useState(projectsList);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState(getInitialProjects);
+  const [loading, setLoading] = useState(() => {
+    try {
+      return !sessionStorage.getItem('webtrek_cached_projects');
+    } catch (_) {
+      return false;
+    }
+  });
   const [selectedCategory, setSelectedCategory] = useState('All');
   const { openEnquiryModal } = useWebsite();
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
+    const timer = setTimeout(() => setLoading(false), 700);
+
     const loadLiveProjects = async () => {
       try {
         const res = await projectsService.getAll();
         if (res.data.success && res.data.data && res.data.data.length > 0) {
           setProjects(res.data.data);
+          try {
+            sessionStorage.setItem('webtrek_cached_projects', JSON.stringify(res.data.data));
+          } catch (_) {}
         }
       } catch (err) {
         // Fallback to default list
       } finally {
+        clearTimeout(timer);
         setLoading(false);
       }
     };
 
     loadLiveProjects();
+    return () => clearTimeout(timer);
   }, []);
 
   const filteredProjects =
