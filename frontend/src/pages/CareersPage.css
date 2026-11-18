@@ -1,0 +1,174 @@
+/* ==========================================================================
+   CareersPage.css - Premium Agency Careers & Job Portal Styling
+   ========================================================================== */
+
+.careers-page-wrapper {
+  background-color: #030919;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.careers-hero-section {
+  position: relative;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background: radial-gradient(circle at 50% 20%, rgba(254, 138, 4, 0.15) 0%, rgba(2, 11, 36, 0.95) 60%, #030919 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.careers-hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+/* CTA Buttons */
+.careers-primary-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #ff9500 0%, #fe8a04 50%, #e03b00 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 20px rgba(254, 138, 4, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.careers-primary-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(254, 138, 4, 0.6);
+  color: #ffffff;
+}
+
+.careers-secondary-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.careers-secondary-cta:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(254, 138, 4, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Perk Cards */
+.careers-perk-card {
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(2, 19, 67, 0.4) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.careers-perk-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(254, 138, 4, 0.35);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.careers-perk-icon-wrapper {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 1rem;
+  background: rgba(254, 138, 4, 0.12);
+  border: 1px solid rgba(254, 138, 4, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+/* Job Cards */
+.careers-job-card {
+  border-radius: 1.25rem;
+  background: #021343;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.careers-job-card:hover {
+  border-color: rgba(254, 138, 4, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.careers-job-card-skeleton {
+  height: 90px;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Resume Dropzone */
+.careers-resume-dropzone {
+  border: 2px dashed rgba(254, 138, 4, 0.35);
+  border-radius: 1rem;
+  background: rgba(0, 0, 0, 0.25);
+  transition: all 0.25s ease;
+}
+
+.careers-resume-dropzone:hover {
+  border-color: #fe8a04;
+  background: rgba(254, 138, 4, 0.05);
+}
+
+.careers-submit-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #ff9500 0%, #fe8a04 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 15px rgba(254, 138, 4, 0.35);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.careers-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(254, 138, 4, 0.5);
+}
+
+.careers-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

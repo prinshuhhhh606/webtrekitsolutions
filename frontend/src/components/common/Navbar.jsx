@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight, PhoneCall } from 'lucide-react';
+import { Menu, X, ArrowRight, PhoneCall, Sparkles, Briefcase } from 'lucide-react';
 import { useWebsite } from '../../context/WebsiteContext';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { websiteName, openEnquiryModal } = useWebsite();
+  const { websiteName, openEnquiryModal, isHiringActive } = useWebsite();
   const location = useLocation();
 
   const brandParts = (websiteName || 'Webtrek IT Solutions').trim().split(' ');
@@ -28,11 +28,11 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About-US', path: '/about-us' },
+    { name: 'About Us', path: '/about-us' },
     { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Our-services', path: '/our-services' },
-    { name: 'Our-projects', path: '/our-project' },
-    { name: 'Blog-page', path: '/blog-page' },
+    { name: 'Our Services', path: '/our-services' },
+    { name: 'Our Projects', path: '/our-project' },
+    { name: 'Blogs', path: '/blog-page' },
   ];
 
   return (
@@ -45,11 +45,11 @@ const Navbar = () => {
               <span>{brandFirst.charAt(0).toUpperCase()}</span>
             </div>
             <div className="flex flex-col">
-              <span className="font-heading font-extrabold text-lg sm:text-2xl text-white tracking-tight leading-none">
+              <span className="font-heading font-extrabold text-lg sm:text-2xl text-white tracking-tight leading-none whitespace-nowrap">
                 {brandFirst.toUpperCase()}<span className="text-[#fe8a04]">.</span>
               </span>
               {brandRest && (
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-300 font-medium">
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-300 font-medium whitespace-nowrap">
                   {brandRest}
                 </span>
               )}
@@ -57,7 +57,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-1.5 xl:gap-3.5 2xl:gap-5">
             {navLinks.map((link) => (
               <NavLink
                 key={link.name}
@@ -70,7 +70,22 @@ const Navbar = () => {
           </nav>
 
           {/* Desktop Right CTA */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
+            {isHiringActive && (
+              <Link
+                to="/careers"
+                className="navbar-hiring-btn"
+                title="Explore Open Roles at Webtrek IT Solutions"
+              >
+                <span className="navbar-hiring-pulse-container">
+                  <span className="navbar-hiring-pulse-ring"></span>
+                  <span className="navbar-hiring-pulse-dot"></span>
+                </span>
+                <span className="navbar-hiring-text">We're Hiring</span>
+                <Sparkles className="w-3.5 h-3.5 text-[#fe8a04] navbar-hiring-sparkle" />
+              </Link>
+            )}
+
             <button
               onClick={() =>
                 openEnquiryModal({
@@ -88,6 +103,20 @@ const Navbar = () => {
 
           {/* Mobile Menu Toggle Button */}
           <div className="lg:hidden flex items-center gap-2">
+            {isHiringActive && (
+              <Link
+                to="/careers"
+                className="navbar-hiring-pill-mobile"
+                title="We're Hiring - Explore Careers"
+              >
+                <span className="navbar-hiring-pulse-container !w-2 !h-2">
+                  <span className="navbar-hiring-pulse-ring"></span>
+                  <span className="navbar-hiring-pulse-dot"></span>
+                </span>
+                <span>Hiring</span>
+              </Link>
+            )}
+
             <button
               onClick={() =>
                 openEnquiryModal({
@@ -117,6 +146,28 @@ const Navbar = () => {
       {/* Mobile Drawer */}
       {isOpen && (
         <div id="mobile-nav-drawer" className="lg:hidden mobile-nav-drawer bg-[#030919] border-b border-white/10 px-4 pt-3 pb-6 space-y-3 shadow-2xl">
+          {isHiringActive && (
+            <Link
+              to="/careers"
+              onClick={() => setIsOpen(false)}
+              className="navbar-hiring-mobile-banner"
+            >
+              <div className="flex items-center gap-3">
+                <span className="navbar-hiring-pulse-container">
+                  <span className="navbar-hiring-pulse-ring"></span>
+                  <span className="navbar-hiring-pulse-dot"></span>
+                </span>
+                <div className="flex flex-col text-left">
+                  <span className="text-white text-sm font-bold flex items-center gap-1.5">
+                    We're Hiring! <Sparkles className="w-3.5 h-3.5 text-[#fe8a04]" />
+                  </span>
+                  <span className="text-xs text-gray-300 font-normal">Explore open roles & join our team</span>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-[#fe8a04] shrink-0" />
+            </Link>
+          )}
+
           <div className="flex flex-col space-y-1.5">
             {navLinks.map((link) => (
               <NavLink

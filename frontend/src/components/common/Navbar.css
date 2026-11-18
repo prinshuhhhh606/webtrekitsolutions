@@ -67,14 +67,25 @@
 
 /* Navigation Links */
 .navbar-link {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: #cbd5e1;
   position: relative;
-  padding: 0.4rem 0.6rem;
+  padding: 0.35rem 0.5rem;
   border-radius: 0.5rem;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   letter-spacing: 0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (min-width: 1280px) {
+  .navbar-link {
+    font-size: 0.92rem;
+    padding: 0.4rem 0.65rem;
+  }
 }
 
 .navbar-link:hover {
@@ -106,18 +117,28 @@
 .navbar-cta-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   background: linear-gradient(135deg, #ff9500 0%, #ff5e13 60%, #e03b00 100%);
   color: #ffffff;
-  padding: 0.65rem 1.65rem;
+  padding: 0.55rem 1.25rem;
   border-radius: 9999px;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   letter-spacing: 0.015em;
   box-shadow: 0 4px 22px rgba(254, 138, 4, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1280px) {
+  .navbar-cta-btn {
+    padding: 0.65rem 1.6rem;
+    font-size: 0.88rem;
+    gap: 0.5rem;
+  }
 }
 
 .navbar-cta-btn:hover {
@@ -147,4 +168,135 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ==========================================================================
+   Dynamic "We're Hiring" Navbar Button & Badge
+   ========================================================================== */
+
+.navbar-hiring-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.92rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(254, 138, 4, 0.12) 0%, rgba(2, 19, 67, 0.6) 100%);
+  border: 1px solid rgba(254, 138, 4, 0.45);
+  box-shadow: 0 0 16px rgba(254, 138, 4, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1280px) {
+  .navbar-hiring-btn {
+    padding: 0.52rem 1.05rem;
+    font-size: 0.85rem;
+    gap: 0.55rem;
+  }
+}
+
+.navbar-hiring-btn:hover {
+  background: linear-gradient(135deg, rgba(254, 138, 4, 0.22) 0%, rgba(2, 19, 67, 0.8) 100%);
+  border-color: #fe8a04;
+  box-shadow: 0 0 24px rgba(254, 138, 4, 0.42), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  transform: translateY(-1.5px) scale(1.02);
+  color: #ffb86c;
+}
+
+.navbar-hiring-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Glowing Pulsing Radar Dot */
+.navbar-hiring-pulse-container {
+  position: relative;
+  display: inline-flex;
+  width: 0.625rem;
+  height: 0.625rem;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.navbar-hiring-pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background-color: #10b981;
+  opacity: 0.75;
+  animation: hiringPulseRing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.navbar-hiring-pulse-dot {
+  position: relative;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+@keyframes hiringPulseRing {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* Mobile Topbar Hiring Pill */
+.navbar-hiring-pill-mobile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(254, 138, 4, 0.15);
+  border: 1px solid rgba(254, 138, 4, 0.4);
+  color: #ffb86c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.navbar-hiring-pill-mobile:active {
+  transform: scale(0.95);
+}
+
+/* Mobile Drawer Hiring Card */
+.navbar-hiring-mobile-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.65rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(254, 138, 4, 0.15) 0%, rgba(2, 19, 67, 0.5) 100%);
+  border: 1px solid rgba(254, 138, 4, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.navbar-hiring-mobile-banner:active {
+  background: linear-gradient(135deg, rgba(254, 138, 4, 0.25) 0%, rgba(2, 19, 67, 0.7) 100%);
+  transform: scale(0.99);
 }

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { settingsService } from '../services/api';
+import { settingsService, careersService } from '../services/api';
 
 const WebsiteContext = createContext();
 
@@ -24,6 +24,8 @@ export const WebsiteProvider = ({ children }) => {
       yearsExperience: '5+',
       supportHours: '24/7',
     },
+    isHiringActive: false,
+    hiringStatus: 'inactive',
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,16 +61,31 @@ export const WebsiteProvider = ({ children }) => {
 
   const fetchSettings = async () => {
     try {
-      const res = await settingsService.get();
-      if (res.data.success && res.data.data) {
-        const data = res.data.data;
-        const currentName = data.websiteName || data.companyName || 'Webtrek IT Solutions';
-        data.websiteName = currentName;
-        data.companyName = currentName;
-        setSettings(data);
-        if (typeof document !== 'undefined') {
-          document.title = `${currentName} | Smart Partner To Grow Your Best Business`;
-        }
+      const [settingsRes, hiringRes] = await Promise.allSettled([
+        settingsService.get(),
+        careersService.getStatus(),
+      ]);
+
+      let data = {};
+      if (settingsRes.status === 'fulfilled' && settingsRes.value?.data?.success && settingsRes.value.data.data) {
+        data = { ...settingsRes.value.data.data };
+      }
+
+      if (hiringRes.status === 'fulfilled' && hiringRes.value?.data?.success) {
+        const isHiring = Boolean(hiringRes.value.data.isHiringActive);
+        data.isHiringActive = isHiring;
+        data.hiringStatus = isHiring ? 'active' : 'inactive';
+      } else {
+        data.isHiringActive = Boolean(data.isHiringActive || data.hiringStatus === 'active');
+        data.hiringStatus = data.isHiringActive ? 'active' : 'inactive';
+      }
+
+      const currentName = data.websiteName || data.companyName || 'Webtrek IT Solutions';
+      data.websiteName = currentName;
+      data.companyName = currentName;
+      setSettings((prev) => ({ ...prev, ...data }));
+      if (typeof document !== 'undefined') {
+        document.title = `${currentName} | Smart Partner To Grow Your Best Business`;
       }
     } catch (err) {
       // Use fallback defaults gracefully if backend is loading
@@ -77,8 +94,50 @@ export const WebsiteProvider = ({ children }) => {
 
   useEffect(() => {
     fetchSettings();
+
+    // Listen for real-time hiring status changes across tabs or admin panels
+    const handleHiringUpdate = (e) => {
+      const active = Boolean(e?.detail?.isHiringActive ?? (e?.detail?.hiringStatus === 'active'));
+      setSettings((prev) => ({
+        ...prev,
+        isHiringActive: active,
+        hiringStatus: active ? 'active' : 'inactive',
+      }));
+    };
+
+    window.addEventListener('webtrek:hiring_status_changed', handleHiringUpdate);
+
+    let bc;
+    try {
+      bc = new BroadcastChannel('webtrek_hiring_channel');
+      bc.onmessage = (event) => {
+        if (event.data && event.data.type === 'HIRING_STATUS_CHANGED') {
+          const active = Boolean(event.data.isHiringActive);
+          setSettings((prev) => ({
+            ...prev,
+            isHiringActive: active,
+            hiringStatus: active ? 'active' : 'inactive',
+          }));
+        }
+      };
+    } catch (_) {}
+
+    return () => {
+      window.removeEventListener('webtrek:hiring_status_changed', handleHiringUpdate);
+      if (bc) bc.close();
+    };
   }, []);
 
+  const setHiringActiveState = (active) => {
+    const isAct = Boolean(active);
+    setSettings((prev) => ({
+      ...prev,
+      isHiringActive: isAct,
+      hiringStatus: isAct ? 'active' : 'inactive',
+    }));
+  };
+
+  const isHiringActive = Boolean(settings.isHiringActive || settings.hiringStatus === 'active');
   const websiteName = settings.websiteName || settings.companyName || 'Webtrek IT Solutions';
 
   return (
@@ -86,6 +145,8 @@ export const WebsiteProvider = ({ children }) => {
       value={{
         settings,
         websiteName,
+        isHiringActive,
+        setHiringActiveState,
         refreshSettings: fetchSettings,
         isModalOpen,
         modalOptions,

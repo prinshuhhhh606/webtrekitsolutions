@@ -13,6 +13,7 @@ import BlogPage from '../pages/BlogPage';
 import BlogDetailsPage from '../pages/BlogDetailsPage';
 import ContactUsPage from '../pages/ContactUsPage';
 import FAQPage from '../pages/FAQPage';
+import CareersPage from '../pages/CareersPage';
 import NotFoundPage from '../pages/NotFoundPage';
 
 // Admin Pages
@@ -25,6 +26,7 @@ import AdminBlogsPage from '../pages/admin/AdminBlogsPage';
 import AdminQuotationsPage from '../pages/admin/AdminQuotationsPage';
 import AdminClientProjectsPage from '../pages/admin/AdminClientProjectsPage';
 import AdminTeamPage from '../pages/admin/AdminTeamPage';
+import AdminHiringPage from '../pages/admin/AdminHiringPage';
 import AdminTestimonialsPage from '../pages/admin/AdminTestimonialsPage';
 import AdminFAQsPage from '../pages/admin/AdminFAQsPage';
 import AdminEnquiriesPage from '../pages/admin/AdminEnquiriesPage';
@@ -45,6 +47,8 @@ const AppRoutes = () => {
         <Route path="/blog-page/:slug" element={<BlogDetailsPage />} />
         <Route path="/contact-us" element={<ContactUsPage />} />
         <Route path="/faq" element={<FAQPage />} />
+        <Route path="/careers" element={<CareersPage />} />
+        <Route path="/hiring" element={<Navigate to="/careers" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
 
@@ -62,6 +66,8 @@ const AppRoutes = () => {
         <Route path="projects" element={<AdminProjectsPage />} />
         <Route path="blogs" element={<AdminBlogsPage />} />
         <Route path="team" element={<AdminTeamPage />} />
+        <Route path="hiring" element={<AdminHiringPage />} />
+        <Route path="careers" element={<Navigate to="/admin/hiring" replace />} />
         <Route path="testimonials" element={<AdminTestimonialsPage />} />
         <Route path="faqs" element={<AdminFAQsPage />} />
         <Route path="settings" element={<AdminSettingsPage />} />

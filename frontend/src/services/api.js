@@ -1,22 +1,30 @@
 import axios from 'axios';
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL ||
-  (import.meta.env.PROD
-    ? 'https://webtrekitsolutions-ezoq.onrender.com/api'
-    : 'http://localhost:5001/api');
+const getBaseUrl = () => {
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname;
+    if (host === 'localhost' || host === '127.0.0.1') {
+      return '/api';
+    }
+  }
+  return (
+    import.meta.env.VITE_API_URL ||
+    'https://webtrekitsolutions-ezoq.onrender.com/api'
+  );
+};
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: getBaseUrl(),
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Intercept requests to attach JWT token
+// Intercept requests to attach JWT token and ensure correct runtime baseURL
 api.interceptors.request.use(
   (config) => {
+    config.baseURL = getBaseUrl();
     const token = localStorage.getItem('webtrek_admin_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -168,6 +176,21 @@ export const uploadService = {
     api.post('/upload/single', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
   uploadMultiple: (formData) =>
     api.post('/upload/multiple', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+};
+
+export const careersService = {
+  getStatus: () => api.get('/careers/status'),
+  updateStatus: (data) => api.patch('/careers/status', data),
+  getJobs: (params) => api.get('/careers/jobs', { params }),
+  getJobById: (id) => api.get(`/careers/jobs/${id}`),
+  createJob: (data) => api.post('/careers/jobs', data),
+  updateJob: (id, data) => api.put(`/careers/jobs/${id}`, data),
+  deleteJob: (id) => api.delete(`/careers/jobs/${id}`),
+  apply: (formData) =>
+    api.post('/careers/apply', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  getApplications: (params) => api.get('/careers/applications', { params }),
+  updateApplicationStatus: (id, data) => api.patch(`/careers/applications/${id}`, data),
+  deleteApplication: (id) => api.delete(`/careers/applications/${id}`),
 };
 
 export default api;

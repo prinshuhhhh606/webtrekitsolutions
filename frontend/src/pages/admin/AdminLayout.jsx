@@ -17,6 +17,7 @@ import {
   BookOpen,
   FileText,
   CheckSquare,
+  UserPlus,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useWebsite } from '../../context/WebsiteContext';
@@ -48,6 +49,7 @@ const AdminLayout = () => {
     { name: 'Projects CMS', path: '/admin/projects', icon: Briefcase },
     { name: 'Blogs & News', path: '/admin/blogs', icon: BookOpen },
     { name: 'Team Members', path: '/admin/team', icon: Users },
+    { name: 'Hiring & Careers', path: '/admin/hiring', icon: UserPlus },
     { name: 'Testimonials', path: '/admin/testimonials', icon: MessageSquareQuote },
     { name: 'FAQs', path: '/admin/faqs', icon: HelpCircle },
     { name: 'Website Settings', path: '/admin/settings', icon: Settings },
